@@ -1,0 +1,42 @@
+RewriteEngine On
+#----------
+#admin
+RewriteRule ^admin$ admin.php
+
+#category
+RewriteRule ^admin/category$ admin.php?controller=category
+RewriteRule ^admin/category/add$ admin.php?controller=category&action=add
+RewriteRule ^admin/category/do_add$ admin.php?controller=category&action=do_add
+RewriteRule ^admin/category/edit/([0-9]+)$ admin.php?controller=category&action=edit&id=$1
+RewriteRule ^admin/category/do_edit/([0-9]+)$ admin.php?controller=category&action=do_edit&id=$1
+RewriteRule ^admin/category/delete/([0-9]+)$ admin.php?controller=category&action=delete&id=$1
+
+#product
+RewriteRule ^admin/product$ admin.php?controller=product
+RewriteRule ^admin/product/add$ admin.php?controller=product&action=add
+RewriteRule ^admin/product/do_add$ admin.php?controller=product&action=do_add
+RewriteRule ^admin/product/edit/([0-9]+)$ admin.php?controller=product&action=edit&id=$1
+RewriteRule ^admin/product/do_edit/([0-9]+)$ admin.php?controller=product&action=do_edit&id=$1
+RewriteRule ^admin/product/delete/([0-9]+)$ admin.php?controller=product&action=delete&id=$1
+
+#user
+RewriteRule ^admin/user$ admin.php?controller=user
+RewriteRule ^admin/user/add$ admin.php?controller=user&action=add
+RewriteRule ^admin/user/do_add$ admin.php?controller=user&action=do_add
+RewriteRule ^admin/user/edit/([0-9]+)$ admin.php?controller=user&action=edit&id=$1
+RewriteRule ^admin/user/do_edit/([0-9]+)$ admin.php?controller=user&action=do_edit&id=$1
+RewriteRule ^admin/user/delete/([0-9]+)$ admin.php?controller=user&action=delete&id=$1
+
+#----------
+#client
+RewriteRule ^home$ /index.php [L]
+
+#product
+RewriteRule ^category/([0-9]+)/page=([0-9]+)$ index.php?controller=product&id=$1&page=$2&action=list
+RewriteRule ^product/([0-9]+) index.php?controller=product&id=$1&action=detail
+#----------
+#logout
+RewriteRule ^admin/logout$ admin.php?controller=logout
+
+#login
+RewriteRule ^login$ admin.php?controller=login
