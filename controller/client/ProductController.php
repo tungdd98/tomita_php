@@ -5,32 +5,40 @@ include_once "model/CategoryModel.php";
 class ProductController extends BaseController {
     public $model;
     public $modelCategory;
+
     public function __construct() {
         $this->model = new ProductModel();
         $this->modelCategory = new CategoryModel();
         
         $action = isset($_GET['action']) ? $_GET['action'] : '';
-        $data['categories'] = $this->modelCategory->getListAll();
+        $id = isset($_GET['id']) ? $_GET['id'] : '';
+        $categories = $this->modelCategory->getListAll();
         switch ($action) {
             case 'detail':
-                $productId = isset($_GET['id']) ? $_GET['id'] : '';
-                $data['product'] = $this->model->getRecord($productId);
-                $data['category'] = $this->modelCategory->getRecord($data['product']->category_id);
-                $data['related'] = $this->model->getListRelate($data['product']->category_id);
+                $product = $this->model->getRecord($id);
+                $data = array(
+                    'product' => $product,
+                    'category' => $this->modelCategory->getRecord($product->category_id),
+                    'related' => $this->model->getListRelate($product->category_id)
+                );
                 $this->loadView("client/product-detail/index", $data);
                 break;
             
             default:
-                $categoryId = isset($_GET['id']) ? $_GET['id'] : '';
-                $data['products'] = $this->getList($categoryId);
-                $data['categoryId'] = $categoryId;
-                $data['breadcrumbs'] = $this->modelCategory->getRecord($categoryId)->title;
+                $data = array(
+                    'products' => $this->getList($id),
+                    'categoryId' => $id,
+                    'breadcrumbs' => $this->modelCategory->getRecord($id)->title,
+                    'categories' => $categories
+                );
                 $this->loadView("client/product-list/index", $data);
                 break;
         }
-        
-        $this->setTemplate("base/client/index", $data); 
+        $this->setTemplate("base/client/index", array('categories' => $categories)); 
     }
+    /**
+     * Lấy danh sách sản phẩm
+     */
     public function getList($id) {
         $recordPerPage = 9;
         $totalRecord = $this->model->getRowCount($id);

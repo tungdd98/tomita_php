@@ -4,13 +4,25 @@
     <script src="public/backend/vendor/datatables/dataTables.bootstrap4.min.js" defer></script>
     <script src="public/backend/js/demo/datatables-demo.js" defer></script>
     <script>
-    document.title = 'Quản lý tài khoản'
+    document.title = "<?php echo $title ?>"
+    <?php if(isset($_GET['status'])) { ?>
+        let title = ''
+        <?php if($_GET['status'] == 'add') {?>
+            title = "Thêm thành công!!",
+        <?php } else if($_GET['status'] == 'update') {?>
+            title = "Cập nhật thành công!!",
+        <?php }?>
+        Toast.fire({
+            icon: "success",
+            title,
+        });
+    <?php }?>
     </script>
 </head>
 <div class="container-fluid">
-    <h1 class="h3 mb-2 text-gray-800">Danh sách tài khoản</h1>
+    <h1 class="h3 mb-2 text-gray-800"><?php echo $title ?></h1>
     <div class="d-flex justify-content-end py-2">
-        <a href="admin/product/add" class="btn btn-outline-primary">Thêm mới</a>
+        <a href="admin/<?php echo $path ?>/add" class="btn btn-outline-primary">Thêm mới</a>
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
@@ -34,8 +46,8 @@
                             <td><?php echo $val->id ?></td>
                             <td><?php echo textTrundate($val->name, 20) ?></td>
                             <td class="text-center">
-                                <?php if(file_exists("public/upload/user/" . $val->thumbnail) && !empty($val->thumbnail)) { ?>
-                                <img src="public/upload/user/<?php echo $val->thumbnail; ?>"
+                                <?php if(file_exists("public/$imagePath/" . $val->thumbnail) && !empty($val->thumbnail)) { ?>
+                                <img src="public/<?php echo $imagePath . '/' . $val->thumbnail?>"
                                     style="width: 80px; height: 80px; object-fit: cover">
                                 <?php } else {; ?>
                                 <img src="public/upload/no-avatar.png"
@@ -49,7 +61,7 @@
                                 <?php echo $val->rule == 1 ? 'Admin' : 'Member' ?>
                             </td>
                             <td class="text-center">
-                                <a href="admin/user/edit/<?php echo $val->id ?>" class="text-info px-1"><i
+                                <a href="admin/<?php echo $path ?>/edit/<?php echo $val->id ?>" class="text-info px-1"><i
                                         class="fa fa-pen"></i></a>
                                 <a href="javascript:;" class="text-danger px-1"><i class="fa fa-trash"
                                         onclick="deleteItem(<?php echo $val->id ?>, 'user')"></i></a>

@@ -27,14 +27,14 @@ class CheckoutController extends BaseController
         $action = !empty($_GET['action']) ? $_GET['action'] : '';
         switch ($action) {
             case 'checkout':
-                $order = $this->modelOrder->addRecord(array(
+                $order_id = $this->modelOrder->addRecord(array(
                     'user_id' => $_SESSION['id'],
                     'status' => 0,
-                    'total' => $_GET['total'],
+                    'total' => $this->getTotalMoney(),
                 ));
-                foreach($_SESSION['cart'] as $key => $val) {
+                foreach ($_SESSION['cart'] as $key => $val) {
                     $this->modelOrderDetail->addRecord(array(
-                        'order_id' => $order->id,
+                        'order_id' => $order_id,
                         'number' => $val['number'],
                         'product_id' => $val['id'],
                     ));
@@ -47,5 +47,13 @@ class CheckoutController extends BaseController
                 $this->setTemplate("base/client/index", $data);
                 break;
         }
+    }
+    public function getTotalMoney()
+    {
+        $sum = 0;
+        foreach ($_SESSION['cart'] as $key => $val) {
+            $sum += $val['priceSale'];
+        }
+        return $sum;
     }
 }

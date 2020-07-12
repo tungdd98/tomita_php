@@ -4,13 +4,25 @@
     <script src="public/backend/vendor/datatables/dataTables.bootstrap4.min.js" defer></script>
     <script src="public/backend/js/demo/datatables-demo.js" defer></script>
     <script>
-    document.title = 'Quản lý danh mục'
+    document.title = "<?php echo $title ?>"
+    <?php if(isset($_GET['status'])) {?>
+        let title = ''
+        <?php if($_GET['status'] == 'add') {?>
+            title = "Thêm thành công!!",
+        <?php } else if($_GET['status'] == 'update') {?>
+            title = "Cập nhật thành công!!",
+        <?php }?>
+        Toast.fire({
+            icon: "success",
+            title,
+        });
+    <?php }?>
     </script>
 </head>
 <div class="container-fluid">
-    <h1 class="h3 mb-2 text-gray-800">Danh mục sản phẩm</h1>
+    <h1 class="h3 mb-2 text-gray-800"><?php echo $title ?></h1>
     <div class="d-flex justify-content-end py-2">
-        <a href="admin/category/add" class="btn btn-outline-primary">Thêm mới</a>
+        <a href="admin/<?php echo $path ?>/add" class="btn btn-outline-primary">Thêm mới</a>
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
@@ -31,10 +43,10 @@
                             <td><?php echo $val->title ?></td>
                             <td><?php echo $val->created_at ?></td>
                             <td class="text-center">
-                                <a href="admin/category/edit/<?php echo $val->id ?>" class="text-info px-1"><i
+                                <a href="admin/<?php echo $path ?>/edit/<?php echo $val->id ?>" class="text-info px-1"><i
                                         class="fa fa-pen"></i></a>
-                                <a href="javascript:;" class="text-danger px-1"><i
-                                        class="fa fa-trash" onclick="deleteItem(<?php echo $val->id ?>, 'category')"></i></a>
+                                <a href="javascript:;" class="text-danger px-1"><i class="fa fa-trash"
+                                        onclick="deleteItem(<?php echo $val->id ?>, 'category')"></i></a>
                             </td>
                         </tr>
                         <?php }; ?>

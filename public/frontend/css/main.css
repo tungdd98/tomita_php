@@ -4312,6 +4312,7 @@ footer .copy-right:before {
 .head-user>a img {
   margin-right: 6px;
   max-width: 32px;
+  height: 32px;
   border-radius: 50%;
   -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
@@ -5556,6 +5557,9 @@ footer .copy-right:before {
 .v-button:hover {
   background-color: #fff;
   color: #f75510;
+}
+.hidden {
+  display: none !important;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,4 +1,3 @@
-<?php include_once "helper/index.php" ?>
 <div class="modal popup-cart popup-primary fade" id="pu-cart">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -27,7 +26,7 @@
                         <span class="transport">Phí vận chuyển: 0đ</span>
                         <span class="line">|</span>
                         <div class="total">
-                            <p>Tổng cộng: <strong>923.000đ</strong></p>
+                            <p>Tổng cộng: <strong>0đ</strong></p>
                             <span>(Giá đã bao gồm thuế VAT)</span>
                         </div>
                     </div>
@@ -36,7 +35,7 @@
                             <a class="smooth ctrl-continue" href="#" title=""><i class="arrow_left"></i> Tiếp tục mua
                                 hàng</a>
                         </div>
-                        <div class="d-flex">
+                        <div class="d-flex hidden" id="group-btn-cart">
                             <div class="cell">
                                 <button class="smooth ctrl-continue mx-3" onclick="destroyCart()">Huỷ giỏ hàng</button>
                             </div>

@@ -2,36 +2,44 @@
 class ProductModel extends Model
 {
     public $table = 'products';
+    /**
+     * Lấy danh sách phần tử
+     */
     public function getListAll()
     {
-        $result = parent::_getListAll("Select * from `$this->table` order by created_at DESC");
-        return $result;
+        return parent::_getListAll("Select * from `$this->table` order by created_at DESC");
     }
+    /**
+     * Lấy danh sách phần tử ngoài trang client
+     */
     public function getListHasPagination($from, $recordPerPage, $categoryId)
     {
-        $result = parent::_getListAll("Select * from `$this->table` where category_id = $categoryId order by created_at DESC limit $from, $recordPerPage");
-        return $result;
+        return parent::_getListAll("Select * from `$this->table` where category_id = $categoryId order by created_at DESC limit $from, $recordPerPage");
     }
-    public function getListEdit($id)
-    {
-        $result = parent::_getListAll("Select * from `$this->table` where id != $id");
-        return $result;
-    }
+    /**
+     * Lấy danh sách sản phẩm liên quan
+     */
     public function getListRelate($id)
     {
-        $result = parent::_getListAll("Select * from `$this->table` where category_id = $id");
-        return $result;
+        return parent::_getListAll("Select * from `$this->table` where category_id = $id");
     }
+    /**
+     * Lấy số bản ghi
+     */
     public function getRowCount($id)
     {
-        $result = parent::_getRowCount("Select id from `$this->table` where category_id = $id");
-        return $result;
+        return parent::_getRowCount("Select id from `$this->table` where category_id = $id");
     }
+    /**
+     * Lấy thông tin phần tử
+     */
     public function getRecord($id)
     {
-        $result = parent::_getRecord("Select * from `$this->table` where id = $id");
-        return $result;
+        return parent::_getRecord("Select * from `$this->table` where id = $id");
     }
+    /**
+     * Thêm mới phần tử
+     */
     public function addRecord($fields)
     {
         $values = array();
@@ -39,8 +47,11 @@ class ProductModel extends Model
             $values[] = "`$key`='$val'";
         }
         $sql = "Insert into `$this->table` SET " . implode(',', $values);
-        parent::_execute($sql);
+        return parent::_execute($sql);
     }
+    /**
+     * Update phần tử
+     */
     public function updateRecord($id, $fields)
     {
         $values = array();
@@ -48,8 +59,11 @@ class ProductModel extends Model
             $values[] = "`$key`='$val'";
         }
         $sql = "Update `$this->table` SET " . implode(',', $values) . " WHERE id = $id";
-        parent::_execute($sql);
+        return parent::_execute($sql);
     }
+    /**
+     * Xoá phần tử
+     */
     public function deleteRecord($id)
     {
         parent::_execute("Delete from `$this->table` where id = $id");

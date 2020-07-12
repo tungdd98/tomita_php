@@ -4,6 +4,7 @@ session_start();
 include_once "config.php";
 include_once "controller/BaseController.php";
 include_once "model/Model.php";
+include_once "helper/index.php";
 
 $controller = isset($_GET["controller"]) ? $_GET["controller"] : "";
 $controller_class = "{$controller}Controller";

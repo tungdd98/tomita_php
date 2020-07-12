@@ -1,5 +1,3 @@
-<?php include_once "helper/index.php" ?>
-
 <head>
     <link href="public/frontend/css/fancybox.css" type="text/css" rel="stylesheet">
     <link href="public/frontend/css/slick.css" type="text/css" rel="stylesheet">
@@ -75,12 +73,12 @@
                             <span>Số lượng :</span>
                             <div class="i-number">
                                 <button class="n-ctrl down smooth"></button>
-                                <input type="text" class="numberic" min="1" max="1000" value="1">
+                                <input type="text" class="numberic" min="1" max="1000" value="1" id="input-detail">
                                 <button class="n-ctrl up smooth"></button>
                             </div>
                         </div>
-                        <div class="btn-addcart">
-                            <a href="" title="">Thêm vào giỏ hàng</a>
+                        <div class="btn-addcart" onclick="addCartDetail(<?php echo $product->id ?>)">
+                            <a href="javascript:;" title="">Thêm vào giỏ hàng</a>
                         </div>
                         <div class="pro-socials">
                             <span>Chia sẻ : </span>
@@ -131,8 +129,10 @@
                     </div>
                     <span class="sales">-<?php echo $val->sale ?>%</span>
                     <div class="control">
-                        <a href="#" title="" class="add-cart btn-crt" data-toggle="modal" data-target="#pu-cart"><i
-                                class="fa fa-cart-plus"></i></a>
+                        <?php if($val->price != 0) { ?>
+                        <button title="" class="add-cart btn-crt" onclick="addCart(<?php echo $val->id ?>, 1, true)"><i
+                                class="fa fa-cart-plus"></i></button>
+                        <?php } ?>
                         <a href="product/<?php echo $val->id ?>" title="" class="view-details btn-crt"><i
                                 class="fa fa-external-link"></i></a>
                         <a href="product/<?php echo $val->id ?>" class="link"></a>

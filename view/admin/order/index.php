@@ -4,11 +4,23 @@
     <script src="public/backend/vendor/datatables/dataTables.bootstrap4.min.js" defer></script>
     <script src="public/backend/js/demo/datatables-demo.js" defer></script>
     <script>
-    document.title = 'Quản lý đơn hàng'
+    document.title = "<?php echo $title ?>"
+    <?php if(isset($_GET['status'])) {?>
+        let title = ''
+        <?php if($_GET['status'] == 'add') {?>
+            title = "Thêm thành công!!",
+        <?php } else if($_GET['status'] == 'update') {?>
+            title = "Cập nhật thành công!!",
+        <?php }?>
+        Toast.fire({
+            icon: "success",
+            title,
+        });
+    <?php }?>
     </script>
 </head>
 <div class="container-fluid">
-    <h1 class="h3 mb-2 text-gray-800">Danh sách đơn hàng</h1>
+    <h1 class="h3 mb-5 text-gray-800"><?php echo $title ?></h1>
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
@@ -31,12 +43,24 @@
                                     <?php echo showStatusOrder($val->status)['label'] ?></div>
                             </td>
                             <td><?php echo $val->created_at ?></td>
-                            <td><?php echo $val->total ?></td>
+                            <td><?php echo number_format($val->total, 2, '.', '.') ?> VNĐ</td>
                             <td class="text-center">
-                                <a href="admin/category/edit/<?php echo $val->id ?>" class="text-info px-1"><i
-                                        class="fa fa-pen"></i></a>
-                                <a href="javascript:;" class="text-danger px-1"><i class="fa fa-eye"
-                                        onclick="deleteItem(<?php echo $val->id ?>, 'category')"></i></a>
+                                <div class="dropdown no-arrow d-inline-block">
+                                    <a class="dropdown-toggle text-info px-1" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-pen"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                        aria-labelledby="dropdownMenuLink">
+                                        <button class="dropdown-item" onclick="updateStatus(<?php echo $val->id ?>, 0)">Chưa thanh toán</button>
+                                        <button class="dropdown-item" onclick="updateStatus(<?php echo $val->id ?>, 1)">Đang vận chuyển</button>
+                                        <button class="dropdown-item" onclick="updateStatus(<?php echo $val->id ?>, 2)">Đã thanh toán</button>
+                                        <button class="dropdown-item" onclick="updateStatus(<?php echo $val->id ?>, 3)">Huỷ đơn hàng</button>
+                                    </div>
+                                </div>
+                                <a href="admin/<?php echo $path ?>/view/<?php echo $val->id ?>" class="text-danger px-1">
+                                    <i class="fa fa-eye"></i>
+                                </a>
                             </td>
                         </tr>
                         <?php }; ?>

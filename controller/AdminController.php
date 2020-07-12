@@ -8,7 +8,8 @@ class AdminController extends BaseController
         $this->modelOrder = new OrderModel();
         $data = array(
             'totalOrder' => $this->modelOrder->getRowCount(),
-            'totalMoney' => $this->modelOrder->getTotal()
+            'totalMoney' => $this->modelOrder->getTotal(),
+            'totalCustomer' => $this->modelOrder->getTotalCustomer()
         );
         $this->loadView("admin/dashboard/index", $data);
         $this->setTemplate("base/admin/index");

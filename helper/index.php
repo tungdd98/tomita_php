@@ -1,4 +1,7 @@
 <?php
+/**
+ * Cắt chuỗi
+ */
 function textTrundate($str, $limit = 20)
 {
     if (strlen($str) <= $limit) {
@@ -7,6 +10,10 @@ function textTrundate($str, $limit = 20)
 
     return mb_substr($str, 0, $limit - 3, 'UTF-8') . '...';
 }
+
+/**
+ * Hiển thị danh mục trang sản phẩm / lỗi
+ */
 function showCategoriesHor($categories, $parentId = 0)
 {
     $childs = array();
@@ -47,6 +54,9 @@ function showCategoriesHor($categories, $parentId = 0)
     }
 }
 
+/**
+ * Hiển thị menu 
+ */
 function showCategories($categories, $parentId = 0, $class = '')
 {
     $childs = array();
@@ -67,11 +77,17 @@ function showCategories($categories, $parentId = 0, $class = '')
     }
 }
 
+/**
+ * Lấy giá bán sale
+ */
 function getPrice($price, $sale)
 {
     return $sale == 0 ? $price : $price - ($sale * $price) / 100;
 }
 
+/**
+ * Hiển thị status đơn hàng
+ */
 function showStatusOrder($status = 0) {
     $arrStatus = array(
         '0' => array('label' => 'Chưa thanh toán', 'class' => 'secondary'),

@@ -7,6 +7,8 @@ class ProductController extends BaseController
     public $model;
     public $modelCategory;
     public $linkUrl = "admin/product";
+    public $path = "admin.php?controller=product";
+    public $imagePath = 'upload/product';
 
     public function __construct()
     {
@@ -14,6 +16,7 @@ class ProductController extends BaseController
         $this->modelCategory = new CategoryModel();
 
         $action = isset($_GET['action']) ? $_GET['action'] : '';
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
         switch ($action) {
             case 'add':
                 $this->addItem();
@@ -22,34 +25,39 @@ class ProductController extends BaseController
                 $this->doAddItem();
                 break;
             case 'edit':
-                $id = isset($_GET['id']) ? $_GET['id'] : 0;
                 $this->showItem($id);
                 break;
             case 'do_edit':
-                $id = isset($_GET['id']) ? $_GET['id'] : 0;
-                $this->doEitItem($id);
+                $this->doEditItem($id);
                 break;
             case 'delete':
-                $id = isset($_GET['id']) ? $_GET['id'] : 0;
                 $this->deleteItem($id);
                 break;
-
             default:
                 $this->getList();
                 break;
         }
     }
 
+    /**
+     * Lấy danh sách phần tử
+     */
     public function getList()
     {
         $data = $this->model->getListAll();
         $result = array(
             'data' => $data,
+            'title' => 'Quản lý sản phẩm',
+            'path' => 'product',
+            'imagePath' => $this->imagePath,
         );
 
         $this->loadView("$this->linkUrl/index", $result);
         $this->setTemplate("base/admin/index");
     }
+    /**
+     * Mở trang thêm phần tử
+     */
     public function addItem()
     {
 
@@ -61,12 +69,15 @@ class ProductController extends BaseController
         $this->loadView("$this->linkUrl/edit", $result);
         $this->setTemplate("base/admin/index");
     }
+    /**
+     * Thêm phần tử
+     */
     public function doAddItem()
     {
         $thumbnail = "";
         if ($_FILES["thumbnail"]["name"] != "") {
             $thumbnail = time() . $_FILES["thumbnail"]["name"];
-            move_uploaded_file($_FILES["thumbnail"]["tmp_name"], "public/upload/product/$thumbnail");
+            move_uploaded_file($_FILES["thumbnail"]["tmp_name"], "public/$this->imagePath/$thumbnail");
         }
         $images = array();
         $images[] = $thumbnail;
@@ -75,7 +86,7 @@ class ProductController extends BaseController
             $images[] = $_FILES['images']['name'][$i];
             $path = $_FILES['images']['tmp_name'][$i];
             if ($path != '') {
-                move_uploaded_file($path, "public/upload/product/$images[$i]");
+                move_uploaded_file($path, "public/$this->imagePath/$images[$i]");
             }
         }
         $this->model->addRecord(array(
@@ -90,20 +101,25 @@ class ProductController extends BaseController
             'images' => json_encode($images),
         ));
         global $APP_URL;
-        header("location:$APP_URL/$this->linkUrl");
+        header("location:$APP_URL/$this->path&status=add");
     }
+    /**
+     * Hiển thị chi tiết phần tử
+     */
     public function showItem($id)
     {
         $result = array(
             'formAction' => "$this->linkUrl/do_edit/$id",
             'record' => $this->model->getRecord($id),
-            'data' => $this->model->getListEdit($id),
             'categories' => $this->modelCategory->getListAll(),
         );
         $this->loadView("$this->linkUrl/edit", $result);
         $this->setTemplate("base/admin/index");
     }
-    public function doEitItem($id)
+    /**
+     * Cập nhật phần tử
+     */
+    public function doEditItem($id)
     {
         $this->model->updateRecord($id, array(
             'title' => $_POST['title'],
@@ -116,19 +132,22 @@ class ProductController extends BaseController
         ));
         if ($_FILES["thumbnail"]["name"] != "") {
             $oldThumbnail = $this->model->getRecord($id)->thumbnail;
-            if (isset($oldThumbnail) && $oldThumbnail != "" && file_exists("public/upload/product/" . $oldThumbnail)) {
-                unlink("public/upload/product/" . $oldThumbnail);
+            if (isset($oldThumbnail) && $oldThumbnail != "" && file_exists("public/$this->imagePath/" . $oldThumbnail)) {
+                unlink("public/$this->imagePath/" . $oldThumbnail);
             }
             $thumbnail = "";
             $thumbnail = time() . $_FILES["thumbnail"]["name"];
-            move_uploaded_file($_FILES["thumbnail"]["tmp_name"], "public/upload/product/$thumbnail");
+            move_uploaded_file($_FILES["thumbnail"]["tmp_name"], "public/$this->imagePath/$thumbnail");
             $this->model->updateRecord($id, array(
-                'thumbnail' => $thumbnail
+                'thumbnail' => $thumbnail,
             ));
         }
         global $APP_URL;
-        header("location:$APP_URL/$this->linkUrl");
+        header("location:$APP_URL/$this->path&status=update");
     }
+    /**
+     * Xoá phần tử
+     */
     public function deleteItem($id)
     {
         $this->model->deleteRecord($id);

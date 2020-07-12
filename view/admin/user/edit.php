@@ -21,7 +21,7 @@ document.title = 'Quản lý tài khoản'
                         <div class="form-group">
                             <label for="password">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="password" required name="password"
-                                value="<?php echo !empty($record->password) ? $record->password : '' ?>">
+                                <?php if(!empty($record)) { ?> disabled <?php } ?>>
                         </div>
                         <div class="form-group">
                             <label for="phone">Số điện thoại</label>
@@ -49,6 +49,5 @@ document.title = 'Quản lý tài khoản'
                 </div>
             </div>
         </form>
-
     </div>
 </div>

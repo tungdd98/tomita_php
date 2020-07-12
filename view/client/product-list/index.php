@@ -1,4 +1,3 @@
-<?php include_once "helper/index.php" ?>
 <section class="page-product page-primary">
     <div class="container">
         <nav aria-label="breadcrumb">

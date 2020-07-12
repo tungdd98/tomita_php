@@ -49,7 +49,7 @@
                     if (!empty($_SESSION['email'])) {
                     ?>
                     <div class="head-user">
-                        <a href="javascript:;" title=""><img src="public/frontend/images/ic-user.jpg" alt=""></a>
+                        <a href="javascript:;" title=""><img src="<?php echo isset($_SESSION['thumbnail']) ? 'public/upload/user/' . $_SESSION['thumbnail']  : 'public/upload/no-avatar.png'?>" alt=""></a>
                         <ul class="nav-user">
                             <li class="active"><a href="" title=""><i class="lnr lnr-user"></i>Thông tin cá nhân</a>
                             </li>

@@ -58,7 +58,8 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['email'] ?></span>
-                <img class="img-profile rounded-circle" src="public/upload/no-avatar.png">
+                <img class="img-profile rounded-circle"
+                    src="<?php echo isset($_SESSION['thumbnail']) ? 'public/upload/user/' . $_SESSION['thumbnail']  : 'public/upload/no-avatar.png'?>">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

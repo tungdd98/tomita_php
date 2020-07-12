@@ -17,15 +17,12 @@ class CartController
                 $this->addCart($id, $number);
                 echo $this->getCartList();
                 break;
-            case 'delete':
-                # code...
-                break;
-
-            case 'update':
-
-                break;
             case 'destroy':
                 $this->destroyCart();
+                echo $this->getCartList();
+                break;
+            case 'delete':
+                $this->deleteCart($id);
                 echo $this->getCartList();
                 break;
             default:
@@ -33,10 +30,17 @@ class CartController
                 break;
         }
     }
+
+    /**
+     * Thêm mới sản phẩm vào giỏ hàng
+     */
     public function addCart($id, $number = 1)
     {
         if (isset($_SESSION['cart'][$id])) {
             $_SESSION['cart'][$id]['number'] += $number;
+            if ($_SESSION['cart'][$id]['number'] == 0) {
+                $this->deleteCart($id);
+            }
         } else {
             $product = $this->model->_getRecord("Select * from products where id = $id");
             $_SESSION['cart'][$id] = array(
@@ -45,33 +49,32 @@ class CartController
                 'description' => $product->description,
                 'thumbnail' => $product->thumbnail,
                 'price' => $product->price,
-                'priceSale' => $product->price - ((int) $product->sale * $product->price) / 100,
+                'priceSale' => getPrice($product->price, (int) $product->sale),
                 'sale' => $product->sale,
                 'number' => $number,
             );
         }
     }
 
-    public function updateCart($id, $number)
-    {
-        if ($number == 0) {
-            unset($_SESSION['cart'][$id]);
-        } else {
-            $base = $_SESSION['cart'][$id];
-
-        }
-    }
-
+    /**
+     * Xoá phần tử trong giỏ hàng
+     */
     public function deleteCart($id)
     {
         unset($_SESSION['cart'][$id]);
     }
 
+    /**
+     * Lấy danh sách giỏ hàng
+     */
     public function getCartList()
     {
         return !empty($_SESSION['cart']) ? json_encode($_SESSION['cart']) : json_encode(array());
     }
 
+    /**
+     * Xoá giỏ hàng
+     */
     public function destroyCart()
     {
         unset($_SESSION['cart']);

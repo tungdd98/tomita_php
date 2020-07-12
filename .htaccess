@@ -1,4 +1,5 @@
 RewriteEngine On
+
 #----------
 #admin
 RewriteRule ^admin$ admin.php
@@ -29,14 +30,12 @@ RewriteRule ^admin/user/delete/([0-9]+)$ admin.php?controller=user&action=delete
 
 #order
 RewriteRule ^admin/order$ admin.php?controller=order
-RewriteRule ^admin/order/add$ admin.php?controller=order&action=add
-RewriteRule ^admin/order/do_add$ admin.php?controller=order&action=do_add
-RewriteRule ^admin/order/edit/([0-9]+)$ admin.php?controller=order&action=edit&id=$1
-RewriteRule ^admin/order/do_edit/([0-9]+)$ admin.php?controller=order&action=do_edit&id=$1
-RewriteRule ^admin/order/delete/([0-9]+)$ admin.php?controller=order&action=delete&id=$1
+RewriteRule ^admin/order/view/([0-9]+)$ admin.php?controller=order&action=view&id=$1
 
 #----------
 #client
+
+#home
 RewriteRule ^home$ /index.php [L]
 
 #product
@@ -44,11 +43,20 @@ RewriteRule ^category/([0-9]+)/page=([0-9]+)$ index.php?controller=product&id=$1
 RewriteRule ^product/([0-9]+) index.php?controller=product&id=$1&action=detail
 #----------
 
+#checkout
+RewriteRule ^checkout$ index.php?controller=checkout
+
+#404
+ErrorDocument 404 http://localhost/clothes/404.php
+
+#----------
+#auth
+
 #logout
 RewriteRule ^admin/logout$ admin.php?controller=logout&type=auth
 
 #login
 RewriteRule ^login$ admin.php?controller=login&type=auth
 
-#checkout
-RewriteRule ^checkout$ index.php?controller=checkout
+#register
+RewriteRule ^register$ admin.php?controller=register&type=auth

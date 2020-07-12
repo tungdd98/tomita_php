@@ -2,25 +2,30 @@
 class OrderModel extends Model
 {
     public $table = 'orders';
+    /**
+     * Lấy danh sách phần tử
+     */
     public function getListAll()
     {
-        $result = parent::_getListAll("Select * from `$this->table` order by created_at DESC");
-        return $result;
+        return parent::_getListAll("Select * from `$this->table` order by created_at DESC");
     }
-    public function getListEdit($id) {
-        $result = parent::_getListAll("Select * from `$this->table` where id != $id");
-        return $result;
-    }
+    /**
+     * Lấy số bản ghi
+     */
     public function getRowCount()
     {
-        $result = parent::_getRowCount("Select id from `$this->table`");
-        return $result;
+        return parent::_getRowCount("Select id from `$this->table`");
     }
+    /**
+     * Lấy thông tin phần tử
+     */
     public function getRecord($id)
     {
-        $result = parent::_getRecord("Select * from `$this->table` where id = $id");
-        return $result;
+        return parent::_getRecord("Select * from `$this->table` where id = $id");
     }
+    /**
+     * Thêm mới phần tử
+     */
     public function addRecord($fields)
     {
         $values = array();
@@ -28,8 +33,11 @@ class OrderModel extends Model
             $values[] = "`$key`='$val'";
         }
         $sql = "Insert into `$this->table` SET " . implode(',', $values);
-        parent::_execute($sql);
+        return parent::_execute($sql);
     }
+    /**
+     * Update phần tử
+     */
     public function updateRecord($id, $fields)
     {
         $values = array();
@@ -37,13 +45,30 @@ class OrderModel extends Model
             $values[] = "`$key`='$val'";
         }
         $sql = "Update `$this->table` SET " . implode(',', $values) . " WHERE id = $id";
-        parent::_execute($sql);
+        return parent::_execute($sql);
     }
+    /**
+     * Xoá phần tử
+     */
     public function deleteRecord($id)
     {
         parent::_execute("Delete from `$this->table` where id = $id");
     }
+    /**
+     * Thống kê: lấy tổng tiền 
+     */
     public function getTotal() {
-        return parent::_getRecord("Select id, sum(total) 'total' from `$this->table` group by id");
+        $data = parent::_getListAll("Select total from `$this->table`");
+        $sum = 0;
+        foreach($data as $key => $val) {
+            $sum += $val->total;
+        }
+        return $sum;
+    }
+    /**
+     * Thống kê: lấy tổng khách hàng
+     */
+    public function getTotalCustomer() {
+        return parent::_getRowCount("Select DISTINCT user_id from`$this->table`");
     }
 }

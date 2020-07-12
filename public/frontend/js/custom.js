@@ -1,4 +1,8 @@
 const $ = jQuery;
+/**
+ * Format giá tiền
+ * @param {*} number
+ */
 const formarMoney = (number) => {
   return new Intl.NumberFormat("vi-VI", {
     style: "currency",
@@ -6,6 +10,9 @@ const formarMoney = (number) => {
   }).format(number);
 };
 
+/**
+ * Cấu hình thông báo
+ */
 const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
@@ -18,6 +25,9 @@ const Toast = Swal.mixin({
   },
 });
 
+/**
+ * Cập nhật thông tin người dùng
+ */
 $("#update-user").on("submit", function (e) {
   e.preventDefault();
   const data = {
@@ -45,6 +55,9 @@ $("#update-user").on("submit", function (e) {
   });
 });
 
+/**
+ * Hiển thị loading
+ */
 const setLoading = () => {
   $(".v-loading-home").addClass("show");
   setTimeout(() => {
@@ -52,6 +65,13 @@ const setLoading = () => {
   }, 1000);
 };
 
+//=========================== Giỏ hàng ================================
+/**
+ * Thêm mới giỏ hàng
+ * @param {*} id
+ * @param {*} number
+ * @param {*} isNoti
+ */
 const addCart = (id, number = 1, isNoti = false) => {
   $.ajax({
     url: `/clothes/?controller=cart&action=add`,
@@ -72,6 +92,9 @@ const addCart = (id, number = 1, isNoti = false) => {
   });
 };
 
+/**
+ * Huỷ giỏ hàng
+ */
 const destroyCart = () => {
   Swal.fire({
     title: "Bạn có chắc chắn muốn xoá giỏ hàng?",
@@ -98,6 +121,29 @@ const destroyCart = () => {
   });
 };
 
+/**
+ * Huỷ sản phẩm trong giỏ
+ * @param {*} id
+ */
+const deleteItemCart = (id) => {
+  $.ajax({
+    url: "/clothes/?controller=cart&action=delete",
+    type: "get",
+    data: {
+      id,
+    },
+    success: function (result) {
+      Toast.fire({
+        icon: "success",
+        title: "Bỏ sản phẩm thành công!!",
+      });
+      renderCart(Object.values(JSON.parse(result)));
+    },
+  });
+};
+/**
+ * Hiển thị giỏ hàng
+ */
 const loadCart = () => {
   $.ajax({
     url: `/clothes/?controller=cart`,
@@ -109,6 +155,10 @@ const loadCart = () => {
   });
 };
 
+/**
+ * Hiển thị dữ liệu giỏ hàng
+ * @param {*} data
+ */
 const renderCart = (data) => {
   let template = ``;
   if (data.length) {
@@ -125,7 +175,9 @@ const renderCart = (data) => {
               </a>
               <div class="ct">
                 <a class="smooth title" href="#" title="">${row.title}</a>
-                <a class="smooth remove" href="#" title=""><i class="icon_close"></i> Bỏ sản
+                <a class="smooth remove" href="#" title="" data-id='${
+                  row.id
+                }'><i class="icon_close"></i> Bỏ sản
                     phẩm</a>
               </div>
             </div>
@@ -147,11 +199,14 @@ const renderCart = (data) => {
         </tr>
       `;
     });
+    $("#group-btn-cart").removeClass("hidden");
   } else {
     template += `<tr class="text-center"><td colspan="4">Không có sản phẩm trong giỏ hàng!!</td></tr>`;
+    $("#group-btn-cart").addClass("hidden");
   }
 
   $("#pu-cart tbody").html(template);
+
   const totalMoney = formarMoney(getTotalMoney(data));
   const totalNumber = getTotalNumber(data);
   $(".md-cart-foot .total-provision span").html(totalMoney);
@@ -162,18 +217,37 @@ const renderCart = (data) => {
   $("#checkout-total .info").html(totalMoney);
 };
 
+/**
+ * Tính tổng tiền
+ * @param {*} data
+ */
 const getTotalMoney = (data) => {
   return data.reduce((act, cur) => {
     return (act += parseInt(cur.priceSale * cur.number));
   }, 0);
 };
 
+/**
+ * Tính tổng sản phẩm
+ * @param {*} data
+ */
 const getTotalNumber = (data) => {
   return data.reduce((act, cur) => {
     return (act += parseInt(cur.number));
   }, 0);
 };
 
+/**
+ * Thêm sản phẩm trang detail
+ */
+const addCartDetail = (id) => {
+  const number = parseInt($("#input-detail").val());
+  addCart(id, number, true);
+}
+
+/**
+ * Thanh toán
+ */
 const checkout = () => {
   $.ajax({
     url: `/clothes/?controller=checkout&action=checkout`,
@@ -187,12 +261,15 @@ const checkout = () => {
         title: "Thanh toán thành công!!",
       });
       setTimeout(() => {
-        window.location.href = "/clothes"; 
+        window.location.href = "/clothes";
       }, 1000);
     },
   });
 };
 
+/**
+ * Cập nhật số lượng giỏ hàng
+ */
 $(document).on("click", ".n-ctrl.down", function () {
   const id = $(this).data("id");
   addCart(id, -1);
@@ -201,7 +278,11 @@ $(document).on("click", ".n-ctrl.up", function () {
   const id = $(this).data("id");
   addCart(id, 1);
 });
-
+$(document).on("click", "a.remove", function (e) {
+  e.preventDefault();
+  const id = $(this).data("id");
+  deleteItemCart(id);
+});
 $(document).ready(function () {
   setLoading();
   loadCart();

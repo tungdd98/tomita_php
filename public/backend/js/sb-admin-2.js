@@ -61,18 +61,11 @@
   });
 })(jQuery); // End of use strict
 
-const Toast = Swal.mixin({
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  timer: 1000,
-  timerProgressBar: true,
-  onOpen: (toast) => {
-    toast.addEventListener("mouseenter", Swal.stopTimer);
-    toast.addEventListener("mouseleave", Swal.resumeTimer);
-  },
-});
-
+/**
+ * Xác nhận xoá phần tử
+ * @param {*} id
+ * @param {*} url
+ */
 const deleteItem = (id, url) => {
   Swal.fire({
     title: "Bạn có chắc chắn muốn xoá?",
@@ -98,5 +91,30 @@ const deleteItem = (id, url) => {
         },
       });
     }
+  });
+};
+
+/**
+ * Cập nhật trạng thái đơn hàng
+ * @param {*} id 
+ * @param {*} status 
+ */
+const updateStatus = (id, status) => {
+  $.ajax({
+    url: `admin.php?controller=order&action=update`,
+    type: "get",
+    data: {
+      status,
+      id
+    },
+    success: function () {
+      Toast.fire({
+        icon: "success",
+        title: "Cập nhật thành công!!",
+      });
+      setTimeout(() => {
+        window.location.href = `admin/order`;
+      }, 1000);
+    },
   });
 };

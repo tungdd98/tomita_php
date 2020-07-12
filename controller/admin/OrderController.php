@@ -1,93 +1,81 @@
 <?php
 include_once "model/OrderModel.php";
+include_once "model/ProductModel.php";
+include_once "model/OrderDetailModel.php";
+include_once "model/UserModel.php";
 
 class OrderController extends BaseController
 {
     public $model;
+    public $modelProduct;
+    public $modelOrderDetail;
+    public $modelUser;
     public $linkUrl = "admin/order";
 
     public function __construct()
     {
         $this->model = new OrderModel();
+        $this->modelProduct = new ProductModel();
+        $this->modelOrderDetail = new OrderDetailModel();
+        $this->modelUser = new UserModel();
 
         $action = isset($_GET['action']) ? $_GET['action'] : '';
+        $id = isset($_GET['id']) ? $_GET['id'] : 0;
         switch ($action) {
-            case 'add':
-                $this->addItem();
-                break;
-            case 'do_add':
-                $this->doAddItem();
-                break;
-            case 'edit':
-                $id = isset($_GET['id']) ? $_GET['id'] : 0;
+            case 'view':
                 $this->showItem($id);
                 break;
-            case 'do_edit':
-                $id = isset($_GET['id']) ? $_GET['id'] : 0;
-                $this->doEitItem($id);
+            case 'update':
+                $this->doEditItem($id);
                 break;
-            case 'delete':
-                $id = isset($_GET['id']) ? $_GET['id'] : 0;
-                $this->deleteItem($id);
-                break;
-
             default:
                 $this->getList();
                 break;
         }
     }
 
+    /**
+     * Lấy danh sách phần tử
+     */
     public function getList()
     {
         $data = $this->model->getListAll();
         $result = array(
             'data' => $data,
+            'title' => 'Quản lý đơn hàng',
+            'path' => 'order',
         );
 
         $this->loadView("$this->linkUrl/index", $result);
         $this->setTemplate("base/admin/index");
     }
-    public function addItem()
-    {
-        $result = array(
-            'formAction' => "$this->linkUrl/do_add",
-            'data' => $this->model->getListAll(),
-        );
-        $this->loadView("$this->linkUrl/edit", $result);
-        $this->setTemplate("base/admin/index");
-    }
-    public function doAddItem()
-    {
-        $this->model->addRecord(array(
-            'title' => $_POST['title'],
-            'parent_id' => !empty($_POST['parentId']) ? $_POST['parentId'] : '',
-        ));
-        global $APP_URL;
-        header("location:$APP_URL/$this->linkUrl");
-    }
+    /**
+     * Hiển thị chi tiết đơn hàng
+     */
     public function showItem($id)
     {
+        $userId = $this->model->getRecord($id)->user_id;
+        $listProductOrder = $this->modelOrderDetail->getListAll($id);
+        $products = array();
+        foreach ($listProductOrder as $key => $val) {
+            $products[] = $this->modelProduct->getRecord($val->product_id);
+            $products[$key]->number = $val->number;
+        }
         $result = array(
-            'formAction' => "$this->linkUrl/do_edit/$id",
             'record' => $this->model->getRecord($id),
-            'data' => $this->model->getListEdit($id)
+            'products' => $products,
+            'user' => $this->modelUser->getRecord($userId),
         );
-        $this->loadView("$this->linkUrl/edit", $result);
+        $this->loadView("$this->linkUrl/view", $result);
         $this->setTemplate("base/admin/index");
     }
-    public function doEitItem($id)
+    /**
+     * Cập nhật phần tử 
+     */
+    public function doEditItem($id)
     {
         $this->model->updateRecord($id, array(
-            'title' => $_POST['title'],
-            'parent_id' => !empty($_POST['parentId']) ? $_POST['parentId'] : '',
+            'status' => $_GET['status'],
         ));
-        global $APP_URL;
-        header("location:$APP_URL/$this->linkUrl");
-    }
-    public function deleteItem($id)
-    {
-        $this->model->deleteRecord($id);
-        global $APP_URL;
-        header("location:$APP_URL/$this->linkUrl");
     }
 }

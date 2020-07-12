@@ -23,7 +23,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Tổng đơn hàng trong tháng</div>
+                                Tổng đơn hàng</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalOrder ?></div>
                         </div>
                         <div class="col-auto">
@@ -41,8 +41,9 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Tổng doanh thu trong tháng</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                Tổng doanh thu</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo number_format($totalMoney, 2, ".", ".")?> VNĐ</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -59,11 +60,10 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tổng khách hàng đặt mua
-                                trong tháng
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $totalCustomer ?></div>
                                 </div>
                                 <div class="col">
                                     <div class="progress progress-sm mr-2">

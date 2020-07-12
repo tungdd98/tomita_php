@@ -2,25 +2,33 @@
 class UserModel extends Model
 {
     public $table = 'users';
+    /**
+     * Lấy danh sách phần tử
+     */
     public function getListAll()
     {
         $result = parent::_getListAll("Select * from `$this->table` order by created_at DESC");
         return $result;
     }
-    public function getListEdit($id) {
-        $result = parent::_getListAll("Select * from `$this->table` where id != $id");
-        return $result;
-    }
+    /**
+     * Lấy số bản ghi
+     */
     public function getRowCount()
     {
         $result = parent::_getRowCount("Select id from `$this->table`");
         return $result;
     }
+    /**
+     * Lấy thông tin phần tử
+     */
     public function getRecord($id)
     {
         $result = parent::_getRecord("Select * from `$this->table` where id = $id");
         return $result;
     }
+    /**
+     * Thêm mới phần tử
+     */
     public function addRecord($fields)
     {
         $values = array();
@@ -28,8 +36,11 @@ class UserModel extends Model
             $values[] = "`$key`='$val'";
         }
         $sql = "Insert into `$this->table` SET " . implode(',', $values);
-        parent::_execute($sql);
+        return parent::_execute($sql);
     }
+    /**
+     * Update phần tử
+     */
     public function updateRecord($id, $fields)
     {
         $values = array();
@@ -37,8 +48,11 @@ class UserModel extends Model
             $values[] = "`$key`='$val'";
         }
         $sql = "Update `$this->table` SET " . implode(',', $values) . " WHERE id = $id";
-        parent::_execute($sql);
+        return parent::_execute($sql);
     }
+    /**
+     * Xoá phần tử
+     */
     public function deleteRecord($id)
     {
         parent::_execute("Delete from `$this->table` where id = $id");
