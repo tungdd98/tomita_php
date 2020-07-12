@@ -48,7 +48,7 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="admin/order">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Đơn hàng</span></a>
     </li>

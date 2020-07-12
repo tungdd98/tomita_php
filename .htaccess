@@ -27,6 +27,14 @@ RewriteRule ^admin/user/edit/([0-9]+)$ admin.php?controller=user&action=edit&id=
 RewriteRule ^admin/user/do_edit/([0-9]+)$ admin.php?controller=user&action=do_edit&id=$1
 RewriteRule ^admin/user/delete/([0-9]+)$ admin.php?controller=user&action=delete&id=$1
 
+#order
+RewriteRule ^admin/order$ admin.php?controller=order
+RewriteRule ^admin/order/add$ admin.php?controller=order&action=add
+RewriteRule ^admin/order/do_add$ admin.php?controller=order&action=do_add
+RewriteRule ^admin/order/edit/([0-9]+)$ admin.php?controller=order&action=edit&id=$1
+RewriteRule ^admin/order/do_edit/([0-9]+)$ admin.php?controller=order&action=do_edit&id=$1
+RewriteRule ^admin/order/delete/([0-9]+)$ admin.php?controller=order&action=delete&id=$1
+
 #----------
 #client
 RewriteRule ^home$ /index.php [L]

@@ -20,7 +20,29 @@ const Toast = Swal.mixin({
 
 $("#update-user").on("submit", function (e) {
   e.preventDefault();
-  console.log('hihi')
+  const data = {
+    email: this["email"].value.trim(),
+    name: this["name"].value.trim(),
+    phone: this["phone"].value.trim(),
+    address: this["address"].value.trim(),
+  };
+  const _this = this;
+  $.ajax({
+    url: "admin.php?controller=user&action=update",
+    type: "get",
+    data,
+    success: function (result) {
+      Toast.fire({
+        icon: "success",
+        title: "Cập nhật thông tin thành công!!",
+      });
+      const response = JSON.parse(result);
+      _this["email"].value = response.email;
+      _this["name"].value = response.name;
+      _this["phone"].value = response.phone;
+      _this["address"].value = response.address;
+    },
+  });
 });
 
 const setLoading = () => {
@@ -31,7 +53,6 @@ const setLoading = () => {
 };
 
 const addCart = (id, number = 1, isNoti = false) => {
-  console.log("add");
   $.ajax({
     url: `/clothes/?controller=cart&action=add`,
     type: "GET",
@@ -92,8 +113,6 @@ const renderCart = (data) => {
   let template = ``;
   if (data.length) {
     data.forEach((row) => {
-      const price =
-        row.sale === 0 ? row.price : row.price - (row.sale * row.price) / 100;
       const thumbnail = row.thumbnail
         ? `public/upload/product/${row.thumbnail}`
         : `public/upload/no-image.jpg`;
@@ -111,9 +130,10 @@ const renderCart = (data) => {
               </div>
             </div>
           </td>
-          <td>${formarMoney(price)}<del>${
-        row.sale > 0 ? formarMoney(row.price) : ""
-      }</del></td>
+          <td>
+            ${formarMoney(row.priceSale)}
+            <del>${formarMoney(row.price)}</del>
+          </td>
           <td>
             <div class="i-number">
                 <button class="n-ctrl down smooth" data-id="${row.id}"></button>
@@ -123,7 +143,7 @@ const renderCart = (data) => {
                 <button class="n-ctrl up smooth" data-id="${row.id}"></button>
             </div>
           </td>
-          <td>${formarMoney(price * row.number)}</td>
+          <td>${formarMoney(row.priceSale * row.number)}</td>
         </tr>
       `;
     });
@@ -144,14 +164,33 @@ const renderCart = (data) => {
 
 const getTotalMoney = (data) => {
   return data.reduce((act, cur) => {
-    return (act += cur.price * cur.number);
+    return (act += parseInt(cur.priceSale * cur.number));
   }, 0);
 };
 
 const getTotalNumber = (data) => {
   return data.reduce((act, cur) => {
-    return (act += cur.number);
+    return (act += parseInt(cur.number));
   }, 0);
+};
+
+const checkout = () => {
+  $.ajax({
+    url: `/clothes/?controller=checkout&action=checkout`,
+    type: "get",
+    data: {
+      total: $("#checkout-subtotal .info").text(),
+    },
+    success: function (result) {
+      Toast.fire({
+        icon: "success",
+        title: "Thanh toán thành công!!",
+      });
+      setTimeout(() => {
+        window.location.href = "/clothes"; 
+      }, 1000);
+    },
+  });
 };
 
 $(document).on("click", ".n-ctrl.down", function () {
@@ -162,6 +201,7 @@ $(document).on("click", ".n-ctrl.up", function () {
   const id = $(this).data("id");
   addCart(id, 1);
 });
+
 $(document).ready(function () {
   setLoading();
   loadCart();

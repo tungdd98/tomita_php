@@ -45,6 +45,7 @@ class CartController
                 'description' => $product->description,
                 'thumbnail' => $product->thumbnail,
                 'price' => $product->price,
+                'priceSale' => $product->price - ((int) $product->sale * $product->price) / 100,
                 'sale' => $product->sale,
                 'number' => $number,
             );

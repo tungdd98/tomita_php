@@ -56,8 +56,9 @@
                                     <span class="sales">-<?php echo $val->sale ?>%</span>
                                     <div class="control">
                                         <?php if($val->price != 0) { ?>
-                                        <a href="#" title="" class="add-cart btn-crt" data-toggle="modal"
-                                            data-target="#pu-cart" onclick="addCart(<?php echo $val->id ?>, 1)"><i class="fa fa-cart-plus"></i></a>
+                                        <button title="" class="add-cart btn-crt"
+                                            onclick="addCart(<?php echo $val->id ?>, 1, true)"><i
+                                                class="fa fa-cart-plus"></i></button>
                                         <?php } ?>
                                         <a href="product/<?php echo $val->id ?>" title=""
                                             class="view-details btn-crt"><i class="fa fa-external-link"></i></a>

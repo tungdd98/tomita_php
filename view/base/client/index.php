@@ -33,7 +33,7 @@
     <div class="wrap">
         <a href="" title="" id="open-cart" class="icon-cart" data-toggle="modal" data-target="#pu-cart">
             <i class="fa fa-shopping-cart"></i>
-            <span>1</span>
+            <span></span>
         </a>
         <?php include "{$COMPONENT_URL}/header.php"; ?>
         <!-- Note: đổ dữ liệu các trang -->

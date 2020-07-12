@@ -24,7 +24,7 @@ class LoginController
                 if ($check->rule == 1) {
                     header("location:$APP_URL/admin");
                 } else {
-                    header("location:$APP_URL/index");
+                    header("location:$APP_URL");
                 }
             }
         }

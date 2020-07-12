@@ -27,8 +27,8 @@
                         </div>
                         <div class="form-group">
                             <label for="address">Địa chỉ</label>
-                            <textarea rows="5" class="form-control" id="address" name="address" required
-                                value="<?php echo !empty($user->address) ? $user->address : '' ?>"></textarea>
+                            <textarea rows="5" class="form-control" id="address" name="address"
+                                required><?php echo !empty($user->address) ? $user->address : '' ?></textarea>
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="submit" class="v-button">Cập nhật</button>
@@ -57,7 +57,7 @@
                             <div class="h6 info">10đ</div>
                         </div>
                         <div class="d-flex justify-content-end pt-5">
-                            <button class="v-button">Thanh toán</button>
+                            <button class="v-button" onclick="checkout()">Thanh toán</button>
                         </div>
                     </div>
                 </div>

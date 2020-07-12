@@ -72,3 +72,12 @@ function getPrice($price, $sale)
     return $sale == 0 ? $price : $price - ($sale * $price) / 100;
 }
 
+function showStatusOrder($status = 0) {
+    $arrStatus = array(
+        '0' => array('label' => 'Chưa thanh toán', 'class' => 'secondary'),
+        '1' => array('label' => 'Đang giao hàng', 'class' => 'info'),
+        '2' => array('label' => 'Đã thanh toán', 'class' => 'success'),
+        '3' => array('label' => 'Huỷ đơn hàng', 'class' => 'danger'),
+    );
+    return $arrStatus[$status];
+}

@@ -1,9 +1,16 @@
 <?php
+include_once "model/OrderModel.php";
 class AdminController extends BaseController
 {
+    public $modelOrder;
     public function __construct()
     {
-        $this->loadView("admin/dashboard/index", array());
+        $this->modelOrder = new OrderModel();
+        $data = array(
+            'totalOrder' => $this->modelOrder->getRowCount(),
+            'totalMoney' => $this->modelOrder->getTotal()
+        );
+        $this->loadView("admin/dashboard/index", $data);
         $this->setTemplate("base/admin/index");
     }
 }
