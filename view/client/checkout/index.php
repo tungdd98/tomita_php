@@ -8,8 +8,8 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-7">
-                    <h2 class="font-weight-bold h4">Thông tin khách hàng</h2>
-                    <form action="">
+                    <h2 class="font-weight-bold h5">Thông tin khách hàng</h2>
+                    <form id="update-user">
                         <div class="form-group">
                             <label for="name">Họ và tên <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="name" required name="name"
@@ -22,21 +22,44 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Số điện thoại</label>
-                            <input type="phone" class="form-control" id="phone" name="phone" required
+                            <input type="text" class="form-control" id="phone" name="phone" required
                                 value="<?php echo !empty($user->phone) ? $user->phone : '' ?>">
                         </div>
                         <div class="form-group">
                             <label for="address">Địa chỉ</label>
-                            <input type="address" class="form-control" id="address" name="address" required
-                                value="<?php echo !empty($user->address) ? $user->address : '' ?>">
+                            <textarea rows="5" class="form-control" id="address" name="address" required
+                                value="<?php echo !empty($user->address) ? $user->address : '' ?>"></textarea>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-success mx-1">Cập nhật</button>
+                            <button type="submit" class="v-button">Cập nhật</button>
                         </div>
                     </form>
+                    <hr>
+                    <h2 class="font-weight-bold h5">Hình thức giao hàng</h2>
+                    <p>Giao tiêu chuẩn</p>
+                    <hr>
+                    <h2 class="font-weight-bold h5">Phương thức thanh toán</h2>
+                    <p>Tiền mặt</p>
                 </div>
                 <div class="col-md-5">
-                    <h2 class="font-weight-bold h4">Thông tin đơn hàng</h2>
+                    <div>
+                        <h2 class="font-weight-bold h5">Thông tin đơn hàng</h2>
+                        <div class="d-flex justify-content-between mb-2" id="checkout-subtotal">
+                            <div>Tổng tạm tính:</div>
+                            <div class="info">10đ</div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <div>Phí vận chuyển:</div>
+                            <div class="info">0đ</div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2" id="checkout-total">
+                            <div>Tổng tiền</div>
+                            <div class="h6 info">10đ</div>
+                        </div>
+                        <div class="d-flex justify-content-end pt-5">
+                            <button class="v-button">Thanh toán</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

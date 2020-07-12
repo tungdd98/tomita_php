@@ -18,39 +18,16 @@ const Toast = Swal.mixin({
   },
 });
 
+$("#update-user").on("submit", function (e) {
+  e.preventDefault();
+  console.log('hihi')
+});
+
 const setLoading = () => {
   $(".v-loading-home").addClass("show");
   setTimeout(() => {
     $(".v-loading-home").removeClass("show");
   }, 1000);
-};
-
-const deleteItem = (id, url) => {
-  Swal.fire({
-    title: "Bạn có chắc chắn muốn xoá?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    cancelButtonText: "Huỷ bỏ",
-    confirmButtonText: "Xác nhận",
-  }).then((result) => {
-    if (result.value) {
-      $.ajax({
-        url: `admin/${url}/delete/${id}`,
-        type: "delete",
-        success: function () {
-          Toast.fire({
-            icon: "success",
-            title: "Xoá bản ghi thành công!!",
-          });
-          setTimeout(() => {
-            window.location.href = `admin/${url}`;
-          }, 1000);
-        },
-      });
-    }
-  });
 };
 
 const addCart = (id, number = 1, isNoti = false) => {
@@ -161,6 +138,8 @@ const renderCart = (data) => {
   $(".md-cart-foot .total strong").html(totalMoney);
   $(".title-cart span").html(totalNumber);
   $("#open-cart span").html(totalNumber);
+  $("#checkout-subtotal .info").html(totalMoney);
+  $("#checkout-total .info").html(totalMoney);
 };
 
 const getTotalMoney = (data) => {

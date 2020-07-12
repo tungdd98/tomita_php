@@ -61,4 +61,42 @@
   });
 })(jQuery); // End of use strict
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1000,
+  timerProgressBar: true,
+  onOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
+const deleteItem = (id, url) => {
+  Swal.fire({
+    title: "Bạn có chắc chắn muốn xoá?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    cancelButtonText: "Huỷ bỏ",
+    confirmButtonText: "Xác nhận",
+  }).then((result) => {
+    if (result.value) {
+      $.ajax({
+        url: `admin/${url}/delete/${id}`,
+        type: "delete",
+        success: function () {
+          Toast.fire({
+            icon: "success",
+            title: "Xoá bản ghi thành công!!",
+          });
+          setTimeout(() => {
+            window.location.href = `admin/${url}`;
+          }, 1000);
+        },
+      });
+    }
+  });
+};

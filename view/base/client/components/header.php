@@ -9,7 +9,7 @@
                 <ul>
                     <li class="active"><a class="smooth" href="<?php echo "{$APP_URL}/"; ?>" title="">Trang chủ</a>
                     </li>
-                    <li><a class="smooth" href="product.html" title="">Sản phẩm <i class="arrow_triangle-down"></i></a>
+                    <li><a class="smooth" href="javascript:;" title="">Sản phẩm <i class="arrow_triangle-down"></i></a>
                         <?php showCategories($categories); ?>
                     </li>
                     <li><a class="smooth" href="promotion.html" title="">khuyến mãi</a></li>

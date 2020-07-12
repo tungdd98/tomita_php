@@ -24,7 +24,7 @@ class UserController extends BaseController
                 break;
             case 'do_edit':
                 $id = isset($_GET['id']) ? $_GET['id'] : 0;
-                $this->doEitItem($id);
+                $this->doEditItem($id);
                 break;
             case 'delete':
                 $id = isset($_GET['id']) ? $_GET['id'] : 0;
@@ -85,9 +85,9 @@ class UserController extends BaseController
         $this->loadView("$this->linkUrl/edit", $result);
         $this->setTemplate("base/admin/index");
     }
-    public function doEitItem($id)
+    public function doEditItem($id)
     {
-        $this->model->addRecord(array(
+        $this->model->updateRecord(array(
             'name' => $_POST['name'],
             'email' => $_POST['email'],
             'password' => md5($_POST['password']),

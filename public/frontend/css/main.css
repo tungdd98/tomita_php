@@ -5394,6 +5394,7 @@ footer .copy-right:before {
   visibility: hidden;
   transition: all 0.3s ease;
 }
+
 .v-loading-home {
   position: fixed;
   top: 0;
@@ -5409,6 +5410,7 @@ footer .copy-right:before {
   visibility: hidden;
   transition: 0.3s ease;
 }
+
 .v-loading-home.show {
   opacity: 1;
   visibility: visible;
@@ -5416,55 +5418,55 @@ footer .copy-right:before {
 
 @keyframes ldio-qbq7ik3lici {
   0% {
-      transform: translate(6.24px, 41.6px) scale(0);
+    transform: translate(6.24px, 41.6px) scale(0);
   }
 
   25% {
-      transform: translate(6.24px, 41.6px) scale(0);
+    transform: translate(6.24px, 41.6px) scale(0);
   }
 
   50% {
-      transform: translate(6.24px, 41.6px) scale(1);
+    transform: translate(6.24px, 41.6px) scale(1);
   }
 
   75% {
-      transform: translate(41.6px, 41.6px) scale(1);
+    transform: translate(41.6px, 41.6px) scale(1);
   }
 
   100% {
-      transform: translate(76.96000000000001px, 41.6px) scale(1);
+    transform: translate(76.96000000000001px, 41.6px) scale(1);
   }
 }
 
 @keyframes ldio-qbq7ik3lici-r {
   0% {
-      transform: translate(76.96000000000001px, 41.6px) scale(1);
+    transform: translate(76.96000000000001px, 41.6px) scale(1);
   }
 
   100% {
-      transform: translate(76.96000000000001px, 41.6px) scale(0);
+    transform: translate(76.96000000000001px, 41.6px) scale(0);
   }
 }
 
 @keyframes ldio-qbq7ik3lici-c {
   0% {
-      background: #e15b64
+    background: #e15b64
   }
 
   25% {
-      background: #abbd81
+    background: #abbd81
   }
 
   50% {
-      background: #f8b26a
+    background: #f8b26a
   }
 
   75% {
-      background: #f47e60
+    background: #f47e60
   }
 
   100% {
-      background: #e15b64
+    background: #e15b64
   }
 }
 
@@ -5524,6 +5526,36 @@ footer .copy-right:before {
 
 .ldio-qbq7ik3lici div {
   box-sizing: content-box;
+}
+
+.v-button {
+  height: 36px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 140px;
+  flex: 0 0 140px;
+  min-width: 140px;
+  border-radius: 30px;
+  background-color: #f75510;
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bold;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  border: 1px solid #f75510;
+}
+.v-button:hover {
+  background-color: #fff;
+  color: #f75510;
 }
 
 /*# sourceMappingURL=main.css.map */
