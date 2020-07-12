@@ -67,6 +67,8 @@ function showCategories($categories, $parentId = 0, $class = '')
     }
 }
 
-function getPrice($price, $sale) {
-    return $sale == 0 ? $price : $price - ($sale * $price) /100;
-} 
+function getPrice($price, $sale)
+{
+    return $sale == 0 ? $price : $price - ($sale * $price) / 100;
+}
+

@@ -7,12 +7,17 @@ include_once "model/Model.php";
 include_once "helper/index.php";
 
 if (isset($_SESSION["email"]) == false) {
-    include_once "controller/LoginController.php";
+    include_once "controller/auth/LoginController.php";
     new LoginController();
 } else {
     $controller = isset($_GET["controller"]) ? $_GET["controller"] : "";
+    $type = isset($_GET["type"]) ? $_GET["type"] : "";
     $controller_class = "{$controller}Controller";
-    $controller = "controller/admin/{$controller}Controller.php";
+    if($type == 'auth') {
+        $controller = "controller/auth/{$controller}Controller.php";
+    } else {
+        $controller = "controller/admin/{$controller}Controller.php";
+    }
 
     if (file_exists($controller)) {
         include_once $controller;

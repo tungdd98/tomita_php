@@ -60,7 +60,7 @@
                         </ul>
                     </div>
                     <?php } else {?>
-                    <a href="javascript:;" title="" class="head-login" data-toggle="modal" data-target="#pu-login"><i
+                    <a href="login" title="" class="head-login"><i
                             class="lnr lnr-user"></i><span>Đăng nhập</span></a>
 
                     <?php }?>

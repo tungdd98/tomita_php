@@ -35,8 +35,12 @@ RewriteRule ^home$ /index.php [L]
 RewriteRule ^category/([0-9]+)/page=([0-9]+)$ index.php?controller=product&id=$1&page=$2&action=list
 RewriteRule ^product/([0-9]+) index.php?controller=product&id=$1&action=detail
 #----------
+
 #logout
-RewriteRule ^admin/logout$ admin.php?controller=logout
+RewriteRule ^admin/logout$ admin.php?controller=logout&type=auth
 
 #login
-RewriteRule ^login$ admin.php?controller=login
+RewriteRule ^login$ admin.php?controller=login&type=auth
+
+#checkout
+RewriteRule ^checkout$ index.php?controller=checkout

@@ -5,6 +5,6 @@ class LogoutController
     {
         unset($_SESSION["email"]);
         global $APP_URL;
-        header("location:$APP_URL/admin");
+        header("location:$APP_URL/login");
     }
 }

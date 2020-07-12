@@ -22,7 +22,7 @@
                     <div class="sl-img-pro">
                         <span class="sales v2">-<?php echo $product->sale ?>%</span>
                         <div class="pro-img">
-                            <?php $images = json_decode($product->images) ?>
+                            <?php $images = !empty($product->images) ? json_decode($product->images) : [] ?>
                             <?php foreach($images as $key => $val) { ?>
                             <div class="item">
                                 <a class="c-img" href="images/b-pro.jpg" title="" data-fancybox="gallery">
@@ -131,7 +131,8 @@
                     </div>
                     <span class="sales">-<?php echo $val->sale ?>%</span>
                     <div class="control">
-                        <a href="#" title="" class="add-cart btn-crt"><i class="fa fa-cart-plus"></i></a>
+                        <a href="#" title="" class="add-cart btn-crt" data-toggle="modal" data-target="#pu-cart"><i
+                                class="fa fa-cart-plus"></i></a>
                         <a href="product/<?php echo $val->id ?>" title="" class="view-details btn-crt"><i
                                 class="fa fa-external-link"></i></a>
                         <a href="product/<?php echo $val->id ?>" class="link"></a>
