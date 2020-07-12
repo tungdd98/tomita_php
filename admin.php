@@ -23,7 +23,7 @@ if ($type == 'auth') {
         if ($_SESSION['rule'] == 1) {
             if (file_exists($controller)) {
                 include_once $controller;
-                new $controller_class();
+                new $controllerClass();
             } else {
                 include_once "controller/AdminController.php";
                 new AdminController();
