@@ -210,7 +210,7 @@ const renderCart = (data) => {
     });
     $("#group-btn-cart").removeClass("hidden");
   } else {
-    template += `<tr class="text-center"><td colspan="4">Không có sản phẩm trong giỏ hàng!!</td></tr>`;
+    template += `<tr class="text-center"><td colspan="5">Không có sản phẩm trong giỏ hàng!!</td></tr>`;
     $("#group-btn-cart").addClass("hidden");
   }
 
@@ -268,6 +268,13 @@ const checkout = () => {
       Toast.fire({
         icon: "success",
         title: "Thanh toán thành công!!",
+      });
+      $.ajax({
+        url: `/clothes/?controller=cart&action=destroy`,
+        type: "GET",
+        success: function (result) {
+          renderCart(Object.values(JSON.parse(result)));
+        },
       });
       setTimeout(() => {
         window.location.href = "/clothes";

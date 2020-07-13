@@ -4,7 +4,7 @@
         <div class="wrap-head">
             <nav class="d-nav v1">
                 <div class="logo-mb">
-                    <a href="<?php echo "{$APP_URL}/admin"; ?>"><img src="public/frontend/images/logo.png"></a>
+                    <a href="<?php echo "{$APP_URL}/admin"; ?>"><img src="public/frontend/images/logo2.png"></a>
                 </div>
                 <ul>
                     <li class="active"><a class="smooth" href="<?php echo "{$APP_URL}/"; ?>" title="">Trang chủ</a>
@@ -16,7 +16,7 @@
                     <li><a class="smooth" href="#" title="">về chúng tôi</a></li>
                 </ul>
             </nav>
-            <a href="<?php echo "{$APP_URL}/admin"; ?>" class="logo"><img src="public/frontend/images/logo.png"
+            <a href="<?php echo "{$APP_URL}/admin"; ?>" class="logo"><img src="public/frontend/images/logo2.png"
                     alt=""></a>
             <div class="head-right">
                 <nav class="d-nav">

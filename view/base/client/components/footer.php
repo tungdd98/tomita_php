@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="ft-item v1">
-                    <a href="" title="" class="logo-ft"><img src="public/frontend/images/logo.png" alt=""></a>
-                    <h2 class="slogan">TOMITA MART - HỆ THỐNG SIÊU THỊ THỰC PHẨM CAO CẤP</h2>
+                    <a href="" title="" class="logo-ft"><img src="public/frontend/images/logo2.png" alt=""></a>
+                    <h2 class="slogan">FlatShop - HỆ THỐNG SIÊU THỊ THỰC PHẨM CAO CẤP</h2>
                     <p>Thương hiệu độc quyền thuộc Tomita Farm.,JSC</p>
                     <div class="connect">
-                        <span>Kết nối với Tomita Mart:</span>
+                        <span>Kết nối với FlatShop:</span>
                         <ul class="social-ft">
                             <li><a href="" title=""><i class="social_facebook"></i></a></li>
                             <li><a href="" title=""><i class="social_twitter"></i></a></li>
