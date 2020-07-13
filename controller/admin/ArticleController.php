@@ -1,25 +1,16 @@
 <?php
-include_once "model/ProductModel.php";
-include_once "model/CategoryModel.php";
-include_once "model/SizeModel.php";
-include_once "model/ProductSizeModel.php";
+include_once "model/ArticleModel.php";
 
-class ProductController extends BaseController
+class ArticleController extends BaseController
 {
     public $model;
-    public $modelCategory;
-    public $modelSize;
-    public $modelProductSize;
-    public $linkUrl = "admin/product";
-    public $path = "admin.php?controller=product";
-    public $imagePath = 'upload/product';
+    public $linkUrl = "admin/article";
+    public $path = "admin.php?controller=article";
+    public $imagePath = 'upload/article';
 
     public function __construct()
     {
-        $this->model = new ProductModel();
-        $this->modelCategory = new CategoryModel();
-        $this->modelSize = new SizeModel();
-        $this->modelProductSize = new ProductSizeModel();
+        $this->model = new ArticleModel();
 
         $action = isset($_GET['action']) ? $_GET['action'] : '';
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
@@ -53,8 +44,8 @@ class ProductController extends BaseController
         $data = $this->model->getListAll();
         $result = array(
             'data' => $data,
-            'title' => 'Quản lý sản phẩm',
-            'path' => 'product',
+            'title' => 'Quản lý bài viết',
+            'path' => 'article',
             'imagePath' => $this->imagePath,
         );
 
@@ -69,8 +60,6 @@ class ProductController extends BaseController
         $result = array(
             'formAction' => "$this->linkUrl/do_add",
             'data' => $this->model->getListAll(),
-            'categories' => $this->modelCategory->getListAll(),
-            'sizes' => $this->modelSize->getListAll()
         );
         $this->loadView("$this->linkUrl/edit", $result);
         $this->setTemplate("base/admin/index");
@@ -85,33 +74,13 @@ class ProductController extends BaseController
             $thumbnail = time() . $_FILES["thumbnail"]["name"];
             move_uploaded_file($_FILES["thumbnail"]["tmp_name"], "public/$this->imagePath/$thumbnail");
         }
-        $images = array();
-        $images[] = $thumbnail;
-        $totalImages = count($_FILES['images']['name']);
-        for ($i = 0; $i < $totalImages; $i++) {
-            $images[] = $_FILES['images']['name'][$i];
-            $path = $_FILES['images']['tmp_name'][$i];
-            if ($path != '') {
-                move_uploaded_file($path, "public/$this->imagePath/$images[$i]");
-            }
-        }
         $productId = $this->model->addRecord(array(
             'title' => $_POST['title'],
-            'category_id' => $_POST['categoryId'],
             'description' => $_POST['description'],
             'content' => $_POST['content'],
-            'price' => $_POST['price'],
-            'sale' => $_POST['sale'],
-            'quantity' => 0,
+            'author' => $_POST['author'],
             'thumbnail' => $thumbnail,
-            'images' => json_encode($images),
         ));
-        foreach($_POST['size'] as $key => $val) {
-            $this->modelProductSize->addRecord(array(
-                'product_id' => $productId,
-                'size_id' => $val
-            ));
-        }
         global $APP_URL;
         header("location:$APP_URL/$this->path&status=add");
     }
@@ -123,7 +92,6 @@ class ProductController extends BaseController
         $result = array(
             'formAction' => "$this->linkUrl/do_edit/$id",
             'record' => $this->model->getRecord($id),
-            'categories' => $this->modelCategory->getListAll(),
         );
         $this->loadView("$this->linkUrl/edit", $result);
         $this->setTemplate("base/admin/index");
@@ -135,12 +103,9 @@ class ProductController extends BaseController
     {
         $this->model->updateRecord($id, array(
             'title' => $_POST['title'],
-            'category_id' => $_POST['categoryId'],
             'description' => $_POST['description'],
             'content' => $_POST['content'],
-            'price' => $_POST['price'],
-            'sale' => $_POST['sale'],
-            'quantity' => 0,
+            'author' => $_POST['author'],
         ));
         if ($_FILES["thumbnail"]["name"] != "") {
             $oldThumbnail = $this->model->getRecord($id)->thumbnail;

@@ -46,6 +46,14 @@
     </div>
     <?php include "{$COMPONENT_URL}/popup-login.php"; ?>
     <?php include "{$COMPONENT_URL}/popup-cart.php"; ?>
+    <?php 
+        include_once "model/SizeModel.php";
+        $MODEL_SIZES = new SizeModel();
+        $SIZES = $MODEL_SIZES->getListAll();
+    ?>
+    <script>
+        const selectSizes = JSON.parse(`<?php echo json_encode($SIZES) ?>`)
+    </script>
 </body>
 
 </html>

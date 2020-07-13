@@ -12,7 +12,7 @@
                     <li><a class="smooth" href="javascript:;" title="">Sản phẩm <i class="arrow_triangle-down"></i></a>
                         <?php showCategories($categories); ?>
                     </li>
-                    <li><a class="smooth" href="promotion.html" title="">khuyến mãi</a></li>
+                    <li><a class="smooth" href="<?php echo "{$APP_URL}/sales"; ?>" title="">khuyến mãi</a></li>
                     <li><a class="smooth" href="#" title="">về chúng tôi</a></li>
                 </ul>
             </nav>
@@ -21,9 +21,9 @@
             <div class="head-right">
                 <nav class="d-nav">
                     <ul>
-                        <li><a class="smooth" href="faqs.html" title="">Hỗ trợ</a></li>
-                        <li><a class="smooth" href="news.html" title="">tin tức</a></li>
-                        <li><a class="smooth" href="contact.html" title="">liên hệ</a></li>
+                        <li><a class="smooth" href="<?php echo "{$APP_URL}/faq"; ?>" title="">Hỗ trợ</a></li>
+                        <li><a class="smooth" href="<?php echo "{$APP_URL}/article"; ?>" title="">tin tức</a></li>
+                        <li><a class="smooth" href="<?php echo "{$APP_URL}/contact"; ?>" title="">liên hệ</a></li>
                     </ul>
                 </nav>
                 <div class="head-crt">

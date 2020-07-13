@@ -161,6 +161,10 @@ const loadCart = () => {
  */
 const renderCart = (data) => {
   let template = ``;
+  let sizes = ``
+  for(const option of selectSizes) {
+    sizes += `<option value="${option.id}">${option.size}</option>`
+  }
   if (data.length) {
     data.forEach((row) => {
       const thumbnail = row.thumbnail
@@ -194,6 +198,11 @@ const renderCart = (data) => {
                 }">
                 <button class="n-ctrl up smooth" data-id="${row.id}"></button>
             </div>
+          </td>
+          <td>
+            <select class="form-control form-control-sm js-size">
+              ${sizes}
+            </select>
           </td>
           <td>${formarMoney(row.priceSale * row.number)}</td>
         </tr>
@@ -282,6 +291,9 @@ $(document).on("click", "a.remove", function (e) {
   e.preventDefault();
   const id = $(this).data("id");
   deleteItemCart(id);
+});
+$(document).on("change", ".js-size", function (e) {
+  console.log($(this).val())
 });
 $(document).ready(function () {
   setLoading();

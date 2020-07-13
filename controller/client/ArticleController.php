@@ -1,20 +1,20 @@
 <?php
+include_once "model/ArticleModel.php";
 include_once "model/CategoryModel.php";
-include_once "model/ProductModel.php";
 
-class HomeController extends BaseController
+class ArticleController extends BaseController
 {
+    public $modelArticle;
     public $modelCategory;
-    public $modelProduct;
     public function __construct()
     {
+        $this->modelArticle = new ArticleModel();
         $this->modelCategory = new CategoryModel();
-        $this->modelProduct = new ProductModel();
         $data = array(
             'categories' => $this->modelCategory->getListAll(),
-            'products' => $this->modelProduct->getListAll()
+            'articles' => $this->modelArticle->getListAll()
         );
-        $this->loadView("client/home/index", $data);
+        $this->loadView("client/article-list/index", $data);
         $this->setTemplate("base/client/index", $data);
     }
 }

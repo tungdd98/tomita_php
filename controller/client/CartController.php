@@ -25,6 +25,10 @@ class CartController
                 $this->deleteCart($id);
                 echo $this->getCartList();
                 break;
+            case 'size':
+                $this->updateSize($id);
+                echo $this->getCartList();
+                break;
             default:
                 echo $this->getCartList();
                 break;
@@ -34,7 +38,7 @@ class CartController
     /**
      * Thêm mới sản phẩm vào giỏ hàng
      */
-    public function addCart($id, $number = 1)
+    public function addCart($id, $number = 0)
     {
         if (isset($_SESSION['cart'][$id])) {
             $_SESSION['cart'][$id]['number'] += $number;
@@ -55,7 +59,13 @@ class CartController
             );
         }
     }
+    /**
+     * Update size
+     */
+    public function updateSize($id)
+    {
 
+    }
     /**
      * Xoá phần tử trong giỏ hàng
      */

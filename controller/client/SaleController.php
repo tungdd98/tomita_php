@@ -1,20 +1,20 @@
 <?php
 include_once "model/CategoryModel.php";
-include_once "model/ProductModel.php";
+include_once "model/Model.php";
 
-class HomeController extends BaseController
+class SaleController extends BaseController
 {
     public $modelCategory;
-    public $modelProduct;
+    public $model;
     public function __construct()
     {
         $this->modelCategory = new CategoryModel();
-        $this->modelProduct = new ProductModel();
+        $this->model = new Model();
         $data = array(
             'categories' => $this->modelCategory->getListAll(),
-            'products' => $this->modelProduct->getListAll()
+            'products' => $this->model->_getListAll("Select * from products where sale > 0")
         );
-        $this->loadView("client/home/index", $data);
+        $this->loadView("client/sale/index", $data);
         $this->setTemplate("base/client/index", $data);
     }
 }

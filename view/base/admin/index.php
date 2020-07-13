@@ -25,7 +25,7 @@
     <script src="public/backend/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
     <script src="public/backend/vendor/jquery-easing/jquery.easing.min.js" defer></script>
     <script src="public/backend/js/sb-admin-2.js" defer></script>
-    <script src="public/backend/ckeditor/ckeditor.js" defer></script>
+    <script src="public/backend/ckeditor/ckeditor.js"></script>
     <script defer>
     const Toast = Swal.mixin({
         toast: true,

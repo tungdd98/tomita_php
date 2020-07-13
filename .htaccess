@@ -20,6 +20,14 @@ RewriteRule ^admin/product/edit/([0-9]+)$ admin.php?controller=product&action=ed
 RewriteRule ^admin/product/do_edit/([0-9]+)$ admin.php?controller=product&action=do_edit&id=$1
 RewriteRule ^admin/product/delete/([0-9]+)$ admin.php?controller=product&action=delete&id=$1
 
+#article
+RewriteRule ^admin/article$ admin.php?controller=article
+RewriteRule ^admin/article/add$ admin.php?controller=article&action=add
+RewriteRule ^admin/article/do_add$ admin.php?controller=article&action=do_add
+RewriteRule ^admin/article/edit/([0-9]+)$ admin.php?controller=article&action=edit&id=$1
+RewriteRule ^admin/article/do_edit/([0-9]+)$ admin.php?controller=article&action=do_edit&id=$1
+RewriteRule ^admin/article/delete/([0-9]+)$ admin.php?controller=article&action=delete&id=$1
+
 #user
 RewriteRule ^admin/user$ admin.php?controller=user
 RewriteRule ^admin/user/add$ admin.php?controller=user&action=add
@@ -27,6 +35,22 @@ RewriteRule ^admin/user/do_add$ admin.php?controller=user&action=do_add
 RewriteRule ^admin/user/edit/([0-9]+)$ admin.php?controller=user&action=edit&id=$1
 RewriteRule ^admin/user/do_edit/([0-9]+)$ admin.php?controller=user&action=do_edit&id=$1
 RewriteRule ^admin/user/delete/([0-9]+)$ admin.php?controller=user&action=delete&id=$1
+
+#import
+RewriteRule ^admin/import$ admin.php?controller=import
+RewriteRule ^admin/import/add$ admin.php?controller=import&action=add
+RewriteRule ^admin/import/do_add$ admin.php?controller=import&action=do_add
+RewriteRule ^admin/import/edit/([0-9]+)$ admin.php?controller=import&action=edit&id=$1
+RewriteRule ^admin/import/do_edit/([0-9]+)$ admin.php?controller=import&action=do_edit&id=$1
+RewriteRule ^admin/import/delete/([0-9]+)$ admin.php?controller=import&action=delete&id=$1
+
+#size
+RewriteRule ^admin/size$ admin.php?controller=size
+RewriteRule ^admin/size/add$ admin.php?controller=size&action=add
+RewriteRule ^admin/size/do_add$ admin.php?controller=size&action=do_add
+RewriteRule ^admin/size/edit/([0-9]+)$ admin.php?controller=size&action=edit&id=$1
+RewriteRule ^admin/size/do_edit/([0-9]+)$ admin.php?controller=size&action=do_edit&id=$1
+RewriteRule ^admin/size/delete/([0-9]+)$ admin.php?controller=size&action=delete&id=$1
 
 #order
 RewriteRule ^admin/order$ admin.php?controller=order
@@ -45,6 +69,18 @@ RewriteRule ^product/([0-9]+) index.php?controller=product&id=$1&action=detail
 
 #checkout
 RewriteRule ^checkout$ index.php?controller=checkout
+
+#sale
+RewriteRule ^sales$ index.php?controller=sale
+
+#article
+RewriteRule ^article$ index.php?controller=article
+
+#faq
+RewriteRule ^faq$ index.php?controller=faq
+
+#contact
+RewriteRule ^contact$ index.php?controller=contact
 
 #404
 ErrorDocument 404 http://localhost/clothes/404.php

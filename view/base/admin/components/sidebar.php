@@ -31,6 +31,11 @@
             <i class="fas fa-fw fa-wrench"></i>
             <span>Sản phẩm</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="admin/size">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Kích thước</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -51,6 +56,16 @@
         <a class="nav-link" href="admin/order">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Đơn hàng</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="admin/import">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Đơn nhập hàng</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="admin/article">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Bài viết</span></a>
     </li>
 
     <!-- Nav Item - Tables -->

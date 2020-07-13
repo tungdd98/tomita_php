@@ -51,9 +51,13 @@ document.title = 'Quản lý sản phẩm'
                                 value="<?php echo !empty($record->sale) ? $record->sale : 0 ?>">
                         </div>
                         <div class="form-group">
-                            <label for="quantity">Số lượng <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="quantity" required name="quantity"
-                                value="<?php echo !empty($record->quantity) ? $record->quantity : 0 ?>">
+                            <label for="size">Kích thước</label>
+                            <select multiple class="form-control" id="size" name="size[]" required>
+                                <?php foreach($sizes as $key => $val) { ?>
+                                <option value="<?php echo $val->id ?>">
+                                    <?php echo $val->size ?></option>
+                                <?php }; ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="thumbnail">Ảnh đại diện</label>

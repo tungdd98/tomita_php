@@ -12,6 +12,7 @@
                                 <th>Sản phẩm</th>
                                 <th>Giá</th>
                                 <th>Số lượng</th>
+                                <th>Kích thước</th>
                                 <th>Thành tiền</th>
                             </tr>
                         </thead>
@@ -32,7 +33,7 @@
                     </div>
                     <div class="bottom">
                         <div class="cell">
-                            <a class="smooth ctrl-continue" href="#" title=""><i class="arrow_left"></i> Tiếp tục mua
+                            <a class="smooth ctrl-continue" href="/clothes" title=""><i class="arrow_left"></i> Tiếp tục mua
                                 hàng</a>
                         </div>
                         <div class="d-flex hidden" id="group-btn-cart">
