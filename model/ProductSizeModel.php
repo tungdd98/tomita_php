@@ -7,24 +7,28 @@ class ProductSizeModel extends Model
      */
     public function getListAll()
     {
-        $result = parent::_getListAll("Select * from `$this->table`");
-        return $result;
+        return parent::_getListAll("Select * from `$this->table`");
+    }
+    /**
+     * Lấy danh sách theo field
+     */
+    public function getListByField($field, $id)
+    {
+        return parent::_getListAll("Select * from `$this->table` where $field = $id");
     }
     /**
      * Lấy số bản ghi
      */
     public function getRowCount()
     {
-        $result = parent::_getRowCount("Select id from `$this->table`");
-        return $result;
+        return parent::_getRowCount("Select id from `$this->table`");
     }
     /**
      * Lấy thông tin phần tử
      */
     public function getRecord($id)
     {
-        $result = parent::_getRecord("Select * from `$this->table` where id = $id");
-        return $result;
+        return parent::_getRecord("Select * from `$this->table` where id = $id");
     }
     /**
      * Thêm mới phần tử

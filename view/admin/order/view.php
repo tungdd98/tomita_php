@@ -20,6 +20,7 @@
                                 <th>Tên sản phẩm</th>
                                 <th>Đơn giá</th>
                                 <th>Số lượng mua</th>
+                                <th>Kích thước</th>
                                 <th>Thành tiền</th>
                             </tr>
                         </thead>
@@ -31,6 +32,7 @@
                                 <td><?php echo number_format(getPrice($val->price, $val->sale), 1, ".", "."); ?> VNĐ
                                 </td>
                                 <td><?php echo $val->number ?></td>
+                                <td><?php echo $val->size ?></td>
                                 <td><?php echo number_format(getPrice($val->price, $val->sale) * $val->number, 2, '.', '.') ?>
                                     VNĐ</td>
                             </tr>

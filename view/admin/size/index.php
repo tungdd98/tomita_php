@@ -41,7 +41,7 @@
                         <tr>
                             <td><?php echo $val->id ?></td>
                             <td><?php echo $val->size ?></td>
-                            <td><?php echo $val->created_at ?></td>
+                            <td><?php echo date_format(date_create($val->created_at),"Y/m/d") ?></td>
                             <td class="text-center">
                                 <a href="admin/<?php echo $path ?>/edit/<?php echo $val->id ?>" class="text-info px-1"><i
                                         class="fa fa-pen"></i></a>

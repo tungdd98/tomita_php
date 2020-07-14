@@ -48,9 +48,9 @@ class ProductController extends BaseController
     /**
      * Lấy danh sách phần tử
      */
-    public function getList()
+    public function getList($orderBy = 'created_at', $orderDir = 'DESC')
     {
-        $data = $this->model->getListAll();
+        $data = $this->model->getListAll($orderBy, $orderDir);
         $result = array(
             'data' => $data,
             'title' => 'Quản lý sản phẩm',
@@ -120,10 +120,20 @@ class ProductController extends BaseController
      */
     public function showItem($id)
     {
+        $productSize = $this->modelProductSize->getListByField('product_id', $id);
+        $listSize = $this->modelSize->getListAll();
+        foreach($productSize as $key => $val) {
+            foreach($listSize as $k => $v) {
+                if($val->size_id == $v->id) {
+                    $v->checked = true;
+                }
+            }
+        }
         $result = array(
             'formAction' => "$this->linkUrl/do_edit/$id",
             'record' => $this->model->getRecord($id),
             'categories' => $this->modelCategory->getListAll(),
+            'sizes' => $listSize
         );
         $this->loadView("$this->linkUrl/edit", $result);
         $this->setTemplate("base/admin/index");

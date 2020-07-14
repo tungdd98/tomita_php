@@ -96,8 +96,8 @@ const deleteItem = (id, url) => {
 
 /**
  * Cập nhật trạng thái đơn hàng
- * @param {*} id 
- * @param {*} status 
+ * @param {*} id
+ * @param {*} status
  */
 const updateStatus = (id, status) => {
   $.ajax({
@@ -105,7 +105,7 @@ const updateStatus = (id, status) => {
     type: "get",
     data: {
       status,
-      id
+      id,
     },
     success: function () {
       Toast.fire({
@@ -118,3 +118,27 @@ const updateStatus = (id, status) => {
     },
   });
 };
+/**
+ * Thống kê báo cáo
+ */
+$(document).on("change", "#select-report", function (e) {
+  const _this = this;
+  $.ajax({
+    url: `admin.php?action=filter`,
+    type: "GET",
+    data: {
+      month: $(_this).val(),
+    },
+    success: function (result) {
+      const response = JSON.parse(result);
+      $("#total-money").html(
+        new Intl.NumberFormat("vi-VI", {
+          style: "currency",
+          currency: "VND",
+        }).format(response.totalMoney)
+      );
+      $("#total-order").html(response.totalOrder);
+      $("#total-user").html(response.totalCustomer);
+    },
+  });
+});

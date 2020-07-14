@@ -10,8 +10,16 @@ class OrderModel extends Model
         return parent::_getListAll("Select * from `$this->table` order by created_at DESC");
     }
     /**
+     * Lấy danh sách theo field
+     */
+    public function getListByField($field, $id)
+    {
+        return parent::_getListAll("Select * from `$this->table` where $field = $id");
+    }
+    /**
      * Lấy số bản ghi
      */
+    
     public function getRowCount()
     {
         return parent::_getRowCount("Select id from `$this->table`");
@@ -55,12 +63,13 @@ class OrderModel extends Model
         parent::_execute("Delete from `$this->table` where id = $id");
     }
     /**
-     * Thống kê: lấy tổng tiền 
+     * Thống kê: lấy tổng tiền
      */
-    public function getTotal() {
-        $data = parent::_getListAll("Select total from `$this->table`");
+    public function getTotal($month)
+    {
+        $data = parent::_getListAll("Select total from `$this->table` where month(created_at) = $month");
         $sum = 0;
-        foreach($data as $key => $val) {
+        foreach ($data as $key => $val) {
             $sum += $val->total;
         }
         return $sum;
@@ -68,7 +77,15 @@ class OrderModel extends Model
     /**
      * Thống kê: lấy tổng khách hàng
      */
-    public function getTotalCustomer() {
-        return parent::_getRowCount("Select DISTINCT user_id from`$this->table`");
+    public function getTotalCustomer($month)
+    {
+        return parent::_getRowCount("Select DISTINCT user_id from`$this->table` where month(created_at) = $month");
+    }
+    /**
+     * Tổng đơn hàng trong tháng
+     */
+    public function getToTalOrderByMonth($month)
+    {
+        return parent::_getRowCount("Select id from `$this->table` where month(created_at) = $month");
     }
 }

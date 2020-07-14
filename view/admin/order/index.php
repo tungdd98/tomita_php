@@ -42,8 +42,8 @@
                                 <div class="badge badge-<?php echo showStatusOrder($val->status)['class'] ?>">
                                     <?php echo showStatusOrder($val->status)['label'] ?></div>
                             </td>
-                            <td><?php echo $val->created_at ?></td>
-                            <td><?php echo number_format($val->total, 2, '.', '.') ?> VNĐ</td>
+                            <td><?php echo date_format(date_create($val->created_at),"Y/m/d") ?></td>
+                            <td><?php echo number_format($val->total, 0, '.', '.') ?> VNĐ</td>
                             <td class="text-center">
                                 <div class="dropdown no-arrow d-inline-block">
                                     <a class="dropdown-toggle text-info px-1" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
@@ -55,7 +55,6 @@
                                         <button class="dropdown-item" onclick="updateStatus(<?php echo $val->id ?>, 0)">Chưa thanh toán</button>
                                         <button class="dropdown-item" onclick="updateStatus(<?php echo $val->id ?>, 1)">Đang vận chuyển</button>
                                         <button class="dropdown-item" onclick="updateStatus(<?php echo $val->id ?>, 2)">Đã thanh toán</button>
-                                        <button class="dropdown-item" onclick="updateStatus(<?php echo $val->id ?>, 3)">Huỷ đơn hàng</button>
                                     </div>
                                 </div>
                                 <a href="admin/<?php echo $path ?>/view/<?php echo $val->id ?>" class="text-danger px-1">

@@ -161,12 +161,13 @@ const loadCart = () => {
  */
 const renderCart = (data) => {
   let template = ``;
-  let sizes = ``
-  for(const option of selectSizes) {
-    sizes += `<option value="${option.id}">${option.size}</option>`
-  }
   if (data.length) {
+    let sizes = `<option value="" disabled selected>--Size--</option>`;
     data.forEach((row) => {
+      const selectSize = JSON.parse(row.selectSize);
+      for (const size of selectSize) {
+        sizes += `<option value="${size}">${size}</option>`;
+      }
       const thumbnail = row.thumbnail
         ? `public/upload/product/${row.thumbnail}`
         : `public/upload/no-image.jpg`;
@@ -200,7 +201,9 @@ const renderCart = (data) => {
             </div>
           </td>
           <td>
-            <select class="form-control form-control-sm js-size">
+            <select class="form-control form-control-sm js-size" data-id="${
+              row.id
+            }">
               ${sizes}
             </select>
           </td>
@@ -252,34 +255,40 @@ const getTotalNumber = (data) => {
 const addCartDetail = (id) => {
   const number = parseInt($("#input-detail").val());
   addCart(id, number, true);
-}
+};
 
 /**
  * Thanh toán
  */
 const checkout = () => {
-  $.ajax({
-    url: `/clothes/?controller=checkout&action=checkout`,
-    type: "get",
-    data: {
-      total: $("#checkout-subtotal .info").text(),
-    },
-    success: function (result) {
-      Toast.fire({
-        icon: "success",
-        title: "Thanh toán thành công!!",
-      });
+  Swal.fire({
+    title: "Xác nhận thanh toán!!",
+    icon: "success",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    cancelButtonText: "Huỷ bỏ",
+    confirmButtonText: "Xác nhận",
+  }).then((result) => {
+    if (result.value) {
       $.ajax({
-        url: `/clothes/?controller=cart&action=destroy`,
-        type: "GET",
+        url: `/clothes/?controller=checkout&action=checkout`,
+        type: "get",
+        data: {
+          total: $("#checkout-subtotal .info").text(),
+        },
         success: function (result) {
-          renderCart(Object.values(JSON.parse(result)));
+          Toast.fire({
+            icon: "success",
+            title: "Thanh toán thành công!!",
+          });
+          renderCart([]);
+          setTimeout(() => {
+            window.location.href = "/clothes";
+          }, 1000);
         },
       });
-      setTimeout(() => {
-        window.location.href = "/clothes";
-      }, 1000);
-    },
+    }
   });
 };
 
@@ -300,7 +309,16 @@ $(document).on("click", "a.remove", function (e) {
   deleteItemCart(id);
 });
 $(document).on("change", ".js-size", function (e) {
-  console.log($(this).val())
+  const _this = this;
+  $.ajax({
+    url: `/clothes/?controller=cart&action=size`,
+    type: "GET",
+    data: {
+      id: $(_this).data("id"),
+      size: $(_this).val(),
+    },
+    success: function (result) {},
+  });
 });
 $(document).ready(function () {
   setLoading();

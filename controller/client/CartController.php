@@ -26,7 +26,8 @@ class CartController
                 echo $this->getCartList();
                 break;
             case 'size':
-                $this->updateSize($id);
+                $size = isset($_GET['size']) ? $_GET['size'] : '';
+                $this->updateSize($id, $size);
                 echo $this->getCartList();
                 break;
             default:
@@ -40,6 +41,11 @@ class CartController
      */
     public function addCart($id, $number = 0)
     {
+        $size = $this->model->_getListAll("Select * from product_size where product_id = $id");
+        $arrSize = array();
+        foreach ($size as $key => $val) {
+            $arrSize[] = $this->model->_getRecord("Select * from sizes where id = $val->size_id")->size;
+        }
         if (isset($_SESSION['cart'][$id])) {
             $_SESSION['cart'][$id]['number'] += $number;
             if ($_SESSION['cart'][$id]['number'] == 0) {
@@ -56,15 +62,17 @@ class CartController
                 'priceSale' => getPrice($product->price, (int) $product->sale),
                 'sale' => $product->sale,
                 'number' => $number,
+                'selectSize' => json_encode($arrSize),
+                'size' => '',
             );
         }
     }
     /**
      * Update size
      */
-    public function updateSize($id)
+    public function updateSize($id, $size)
     {
-
+        $_SESSION['cart'][$id]['size'] = $size;
     }
     /**
      * Xoá phần tử trong giỏ hàng

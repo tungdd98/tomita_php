@@ -19,6 +19,7 @@
     <link href="public/frontend/css/main.css" type="text/css" rel="stylesheet">
     <script src="public/frontend/js/jquery.js" defer></script>
     <script src="public/frontend/js/bootstrap.min.js" defer></script>
+    <script src="public/frontend/js/popper.min.js"></script>
     <script src="public/frontend/js/owl.carousel.min.js" defer></script>
     <script src="public/frontend/js/wow.min.js" defer></script>
     <script src="public/frontend/js/scrollspy.js" defer></script>
@@ -46,15 +47,7 @@
     </div>
     <?php include "{$COMPONENT_URL}/popup-login.php"; ?>
     <?php include "{$COMPONENT_URL}/popup-cart.php"; ?>
-    <?php 
-        include_once "model/SizeModel.php";
-        $MODEL_SIZES = new SizeModel();
-        $SIZES = $MODEL_SIZES->getListAll();
-    ?>
-    <script>
-    const selectSizes = JSON.parse(`<?php echo json_encode($SIZES) ?>`)
-    </script>
-    <script>
+    <!-- <script>
     ! function(s, u, b, i, z) {
         var r, m;
         s[i] || (s._sbzaccid = z, s[i] = function() {
@@ -69,7 +62,7 @@
                 .async = 1, n.src = t, c.parentNode.insertBefore(n, c), setTimeout(m, 2e3, e + 1))
         })(0))
     }(window, document, "script", "subiz", "acqsgdjhqqlaxhusaovu");
-    </script>
+    </script> -->
 </body>
 
 </html>

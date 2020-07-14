@@ -10,11 +10,7 @@ class ArticleController extends BaseController
     {
         $this->modelArticle = new ArticleModel();
         $this->modelCategory = new CategoryModel();
-        $data = array(
-            'categories' => $this->modelCategory->getListAll(),
-            'articles' => $this->modelArticle->getListAll()
-        );
-        $this->loadView("client/article-list/index", $data);
-        $this->setTemplate("base/client/index", $data);
+        $this->loadView("client/article-list/index", array('articles' => $this->modelArticle->getListAll()));
+        $this->setTemplate("base/client/index", array('categories' => $this->modelCategory->getListAll()));
     }
 }

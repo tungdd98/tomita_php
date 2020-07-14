@@ -1,6 +1,7 @@
 <div class="certifi-home">
     <div class="container">
         <h3 class="head-primary">Sản phẩm mới nhất</h3>
+        <?php if(count($products) > 0) {?>
         <div class="row">
             <?php foreach($products as $key => $val) { ?>
             <div class="col-lg-3 col-sm-6">
@@ -18,10 +19,10 @@
                         </h3>
                         <?php if($val->price > 0) { ?>
                         <div class="price">
-                            <span><strong><?php echo number_format(getPrice($val->price, $val->sale), 1, ".", "."); ?>
+                            <span><strong><?php echo number_format(getPrice($val->price, $val->sale), 0, ".", "."); ?>
                                     VNĐ</strong></span>
                             <?php if($val->sale != 0) { ?>
-                            <div><del><?php echo number_format($val->price, 1, ".", "."); ?> VNĐ</del>
+                            <div><del><?php echo number_format($val->price, 0, ".", "."); ?> VNĐ</del>
                             </div>
                             <?php } ?>
                         </div>
@@ -29,7 +30,9 @@
                         <div class="text-danger font-weight-bold" style="font-size: 18px">Liên hệ</div>
                         <?php } ?>
                     </div>
+                    <?php if($val->sale > 0) {?>
                     <span class="sales">-<?php echo $val->sale ?>%</span>
+                    <?php }?>
                     <div class="control">
                         <?php if($val->price != 0) { ?>
                         <button title="" class="add-cart btn-crt" onclick="addCart(<?php echo $val->id ?>, 1, true)"><i
@@ -43,6 +46,9 @@
             </div>
             <?php } ?>
         </div>
+        <?php } else {?>
+        <div class="text-center my-5">Không có sản phẩm</div>
+        <?php }?>
         <h3 class="head-primary">Chứng chỉ & chứng nhận
             <span>100% sản phẩm có nguồn gốc xuất xứ rõ ràng, có chứng nhận/chứng chỉ.</span>
         </h3>

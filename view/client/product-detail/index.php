@@ -39,9 +39,7 @@
                                 <a class="c-img">
                                     <?php if(file_exists("public/upload/product/" . $val) && !empty($val)) { ?>
                                     <img src="public/upload/product/<?php echo $val; ?>">
-                                    <?php } else {; ?>
-                                    <img src="public/upload/no-image.jpg">
-                                    <?php } ?>
+                                    <?php }?>
                                 </a>
                             </div>
                             <?php } ?>
@@ -53,10 +51,10 @@
                         <h1 class="title-pro"><?php echo $product->title ?></h1>
                         <?php if($product->price > 0) { ?>
                         <div class="price">
-                            <span><strong><?php echo number_format(getPrice($product->price, $product->sale), 1, ".", "."); ?>
+                            <span><strong><?php echo number_format(getPrice($product->price, $product->sale), 0, ".", "."); ?>
                                     VNĐ</strong></span>
                             <?php if($product->sale != 0) { ?>
-                            <div><del><?php echo number_format($product->price, 1, ".", "."); ?> VNĐ</del>
+                            <div><del><?php echo number_format($product->price, 0, ".", "."); ?> VNĐ</del>
                             </div>
                             <?php } ?>
                         </div>
@@ -107,19 +105,17 @@
                     <a href="product/<?php echo $val->id ?>" title="" class="img-primary">
                         <?php if(file_exists("public/upload/product/" . $val->thumbnail) && !empty($val->thumbnail)) { ?>
                         <img src="public/upload/product/<?php echo $val->thumbnail; ?>">
-                        <?php } else {; ?>
-                        <img src="public/upload/no-image.jpg">
-                        <?php } ?>
+                        <?php }?>
                     </a>
                     <div class="ct">
                         <h3 class="title"><a href="product/<?php echo $val->id ?>"
                                 title=""><?php echo $val->title ?></a></h3>
                         <?php if($val->price > 0) { ?>
                         <div class="price">
-                            <span><strong><?php echo number_format(getPrice($val->price, $val->sale), 1, ".", "."); ?>
+                            <span><strong><?php echo number_format(getPrice($val->price, $val->sale), 0, ".", "."); ?>
                                     VNĐ</strong></span>
                             <?php if($val->sale != 0) { ?>
-                            <div><del><?php echo number_format($val->price, 1, ".", "."); ?> VNĐ</del>
+                            <div><del><?php echo number_format($val->price, 0, ".", "."); ?> VNĐ</del>
                             </div>
                             <?php } ?>
                         </div>
@@ -127,7 +123,9 @@
                         <div class="text-danger font-weight-bold" style="font-size: 18px">Liên hệ</div>
                         <?php } ?>
                     </div>
-                    <span class="sales">-<?php echo $val->sale ?>%</span>
+                    <?php if($val->sale > 0) {?>
+                        <span class="sales">-<?php echo $val->sale ?>%</span>
+                    <?php }?>
                     <div class="control">
                         <?php if($val->price != 0) { ?>
                         <button title="" class="add-cart btn-crt" onclick="addCart(<?php echo $val->id ?>, 1, true)"><i

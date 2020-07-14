@@ -7,20 +7,12 @@
         </div>
         <div class="sidebar-brand-text mx-3">Admin</div>
     </a>
-
-    <!-- Divider -->
     <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link" href="admin">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span>Thống kê báo cáo</span></a>
     </li>
-    <hr class="sidebar-divider">
-    <div class="sidebar-heading">
-        Hàng hoá
-    </div>
     <li class="nav-item">
         <a class="nav-link" href="admin/category">
             <i class="fas fa-fw fa-cog"></i>
@@ -37,21 +29,6 @@
             <span>Kích thước</span></a>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Hệ thống
-    </div>
-
-    <li class="nav-item">
-        <a class="nav-link" href="admin/user">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Tài khoản</span></a>
-    </li>
-
-    <!-- Nav Item - Charts -->
     <li class="nav-item">
         <a class="nav-link" href="admin/order">
             <i class="fas fa-fw fa-chart-area"></i>
@@ -67,17 +44,10 @@
             <i class="fas fa-fw fa-wrench"></i>
             <span>Bài viết</span></a>
     </li>
-
-    <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Hàng tồn kho</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Thống kê báo cáo</span></a>
+        <a class="nav-link" href="admin/user">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Tài khoản</span></a>
     </li>
 
     <!-- Divider -->

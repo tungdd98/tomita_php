@@ -82,6 +82,15 @@ RewriteRule ^faq$ index.php?controller=faq
 #contact
 RewriteRule ^contact$ index.php?controller=contact
 
+#account
+RewriteRule ^account$ index.php?controller=account
+
+#history-order
+RewriteRule ^history-order$ index.php?controller=history
+
+#about-us
+RewriteRule ^about-us$ index.php?controller=about
+
 #404
 ErrorDocument 404 http://localhost/clothes/404.php
 

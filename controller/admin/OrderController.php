@@ -39,9 +39,8 @@ class OrderController extends BaseController
      */
     public function getList()
     {
-        $data = $this->model->getListAll();
         $result = array(
-            'data' => $data,
+            'data' => $this->model->getListAll(),
             'title' => 'Quản lý đơn hàng',
             'path' => 'order',
         );
@@ -60,6 +59,7 @@ class OrderController extends BaseController
         foreach ($listProductOrder as $key => $val) {
             $products[] = $this->modelProduct->getRecord($val->product_id);
             $products[$key]->number = $val->number;
+            $products[$key]->size = $val->size;
         }
         $result = array(
             'record' => $this->model->getRecord($id),

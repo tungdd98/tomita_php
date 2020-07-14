@@ -4,7 +4,7 @@
         <div class="wrap-head">
             <nav class="d-nav v1">
                 <div class="logo-mb">
-                    <a href="<?php echo "{$APP_URL}/admin"; ?>"><img src="public/frontend/images/logo2.png"></a>
+                    <a href="<?php echo "{$APP_URL}/admin"; ?>"><img src="public/frontend/images/logo.png"></a>
                 </div>
                 <ul>
                     <li class="active"><a class="smooth" href="<?php echo "{$APP_URL}/"; ?>" title="">Trang chủ</a>
@@ -13,10 +13,10 @@
                         <?php showCategories($categories); ?>
                     </li>
                     <li><a class="smooth" href="<?php echo "{$APP_URL}/sales"; ?>" title="">khuyến mãi</a></li>
-                    <li><a class="smooth" href="#" title="">về chúng tôi</a></li>
+                    <li><a class="smooth" href="<?php echo "{$APP_URL}/about-us"; ?>" title="">về chúng tôi</a></li>
                 </ul>
             </nav>
-            <a href="<?php echo "{$APP_URL}/admin"; ?>" class="logo"><img src="public/frontend/images/logo2.png"
+            <a href="<?php echo "{$APP_URL}/admin"; ?>" class="logo"><img src="public/frontend/images/logo.png"
                     alt=""></a>
             <div class="head-right">
                 <nav class="d-nav">
@@ -49,19 +49,22 @@
                     if (!empty($_SESSION['email'])) {
                     ?>
                     <div class="head-user">
-                        <a href="javascript:;" title=""><img src="<?php echo isset($_SESSION['thumbnail']) ? 'public/upload/user/' . $_SESSION['thumbnail']  : 'public/upload/no-avatar.png'?>" alt=""></a>
+                        <a href="javascript:;" title=""><img
+                                src="<?php echo isset($_SESSION['thumbnail']) ? 'public/upload/user/' . $_SESSION['thumbnail']  : 'public/upload/no-avatar.png'?>"
+                                alt=""></a>
                         <ul class="nav-user">
-                            <li class="active"><a href="" title=""><i class="lnr lnr-user"></i>Thông tin cá nhân</a>
+                            <li class="active"><a href="<?php echo "{$APP_URL}/account"; ?>" title=""><i
+                                        class="lnr lnr-user"></i>Thông tin cá nhân</a>
                             </li>
-                            <li><a href="" title=""><i class="lnr lnr-history"></i>Lịch sử mua hàng</a></li>
-                            <li><a href="#" title=""><i class="lnr lnr-cart"></i>Giỏ hàng của bạn </a><span>(1)</span>
+                            <li><a href="<?php echo "{$APP_URL}/history-order"; ?>" title=""><i
+                                        class="lnr lnr-history"></i>Lịch sử mua hàng</a></li>
+                            <li><a href="#" title="" data-toggle="modal" data-target="#pu-cart"><i class="lnr lnr-cart"></i>Giỏ hàng của bạn </a><span>(1)</span>
                             </li>
                             <li><a href="admin/logout" title=""><i class="lnr lnr-exit"></i>Đăng xuất</a></li>
                         </ul>
                     </div>
                     <?php } else {?>
-                    <a href="login" title="" class="head-login"><i
-                            class="lnr lnr-user"></i><span>Đăng nhập</span></a>
+                    <a href="login" title="" class="head-login"><i class="lnr lnr-user"></i><span>Đăng nhập</span></a>
 
                     <?php }?>
                 </div>

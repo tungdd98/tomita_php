@@ -12,6 +12,19 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Thống kê báo cáo</h1>
     </div>
+    <div class="d-flex justify-content-end">
+        <div class="form-group row" style="flex: 0 0 500px">
+            <label for="inputEmail3" class="col-sm-4 col-form-label">Chọn tháng</label>
+            <div class="col-sm-8">
+                <select name="" id="select-report" class="form-control">
+                    <?php for($i = 1; $i <= 12; $i++) {?>
+                    <option value="<?php echo $i ?>" <?php if(date('m') == $i){ ?> selected <?php };?>>Tháng
+                        <?php echo $i?></option>
+                    <?php };?>
+                </select>
+            </div>
+        </div>
+    </div>
 
     <!-- Content Row -->
     <div class="row">
@@ -23,8 +36,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Tổng đơn hàng</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $totalOrder ?></div>
+                                Tổng đơn hàng trong tháng</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="total-order"><?php echo $totalOrder ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -41,9 +54,9 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Tổng doanh thu</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo number_format($totalMoney, 2, ".", ".")?> VNĐ</div>
+                                Tổng doanh thu trong tháng</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="total-money">
+                                <?php echo number_format($totalMoney, 0, ".", ".")?> <span>đ</span></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -60,10 +73,12 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tổng khách hàng đặt mua
+                                trong tháng
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $totalCustomer ?></div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="total-user">
+                                        <?php echo $totalCustomer ?></div>
                                 </div>
                                 <div class="col">
                                     <div class="progress progress-sm mr-2">
@@ -88,7 +103,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Số đơn hàng bị huỷ trong tháng</div>
+                                Tiền lãi trong tháng</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                         </div>
                         <div class="col-auto">

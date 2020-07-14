@@ -16,11 +16,33 @@
                             <h3 class="title-pro">Tất cả</h3>
                             <div class="filter">
                                 <span>Sắp xếp theo:</span>
-                                <div class="form-group">
-                                    <select name="" id="">
-                                        <option value="">Bán chạy nhất</option>
-                                        <option value="">Bán chậm nhất</option>
-                                    </select>
+                                <div class="dropdown no-arrow d-inline-block">
+                                    <a class="dropdown-toggle text-info px-1" href="#" role="button"
+                                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <i class="fa fa-pen"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                        aria-labelledby="dropdownMenuLink">
+                                        <button class="dropdown-item">
+                                            <a
+                                                href="/clothes?controller=product&action=filter&orderBy=created_at&orderDir=desc&id=<?php echo $categoryId ?>&page=0">Mới
+                                                nhất
+                                            </a>
+                                        </button>
+                                        <button class="dropdown-item">
+                                            <a
+                                                href="/clothes?controller=product&action=filter&orderBy=price&orderDir=desc&id=<?php echo $categoryId ?>&page=0">Giá
+                                                từ cao tới thấp
+                                            </a>
+                                        </button>
+                                        <button class="dropdown-item">
+                                            <a
+                                                href="/clothes?controller=product&action=filter&orderBy=price&orderDir=desc&id=<?php echo $categoryId ?>&page=0">Giá
+                                                từ thấp tới cao
+                                            </a>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +63,7 @@
                                                 title=""><?php echo $val->title ?></a></h3>
                                         <?php if($val->price > 0) { ?>
                                         <div class="price">
-                                            <span><strong><?php echo number_format(getPrice($val->price, $val->sale), 1, ".", "."); ?>
+                                            <span><strong><?php echo number_format(getPrice($val->price, $val->sale), 0, ".", "."); ?>
                                                     VNĐ</strong></span>
                                             <?php if($val->sale != 0) { ?>
                                             <div><del><?php echo number_format($val->price, 1, ".", "."); ?> VNĐ</del>
@@ -52,7 +74,9 @@
                                         <div class="text-danger font-weight-bold" style="font-size: 18px">Liên hệ</div>
                                         <?php } ?>
                                     </div>
+                                    <?php if($val->sale > 0) {?>
                                     <span class="sales">-<?php echo $val->sale ?>%</span>
+                                    <?php }?>
                                     <div class="control">
                                         <?php if($val->price != 0) { ?>
                                         <button title="" class="add-cart btn-crt"

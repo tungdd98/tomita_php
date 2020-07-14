@@ -74,6 +74,7 @@ class ImportController extends BaseController
         $this->model->addRecord(array(
             'product_id' => $_POST['product_id'],
             'quantity' => $_POST['quantity'],
+            'price' => $_POST['price']
         ));
         $product = $this->modelProduct->getRecord($_POST['product_id']);
         if ($product) {
@@ -111,6 +112,7 @@ class ImportController extends BaseController
         $this->model->updateRecord($id, array(
             'product_id' => $_POST['product_id'],
             'quantity' => (int) $_POST['quantity'],
+            'price' => $_POST['price']
         ));
         $this->modelProduct->updateRecord($product->id, array(
             'quantity' => (int) $_POST['quantity'] + (int) $product->quantity - (int) $import->quantity,

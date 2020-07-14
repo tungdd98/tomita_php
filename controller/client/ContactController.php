@@ -7,10 +7,7 @@ class ContactController extends BaseController
     public function __construct()
     {
         $this->modelCategory = new CategoryModel();
-        $data = array(
-            'categories' => $this->modelCategory->getListAll(),
-        );
-        $this->loadView("client/contact/index", $data);
-        $this->setTemplate("base/client/index", $data);
+        $this->loadView("client/contact/index", array());
+        $this->setTemplate("base/client/index", array('categories' => $this->modelCategory->getListAll()));
     }
 }

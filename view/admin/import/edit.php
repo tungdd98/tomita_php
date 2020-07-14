@@ -19,9 +19,14 @@ document.title = 'Quản lý đơn hàng nhập'
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="price">Số lượng <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" id="price" required name="quantity"
+                    <label for="quantity">Số lượng nhập<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="quantity" required name="quantity"
                         value="<?php echo !empty($record->quantity) ? $record->quantity : 0 ?>">
+                </div>
+                <div class="form-group">
+                    <label for="price">Đơn giá nhập <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="price" required name="price"
+                        value="<?php echo !empty($record->price) ? $record->price : 0 ?>">
                 </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-end">

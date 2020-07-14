@@ -52,12 +52,19 @@ document.title = 'Quản lý sản phẩm'
                         </div>
                         <div class="form-group">
                             <label for="size">Kích thước</label>
-                            <select multiple class="form-control" id="size" name="size[]" required>
+                            <div class="row">
                                 <?php foreach($sizes as $key => $val) { ?>
-                                <option value="<?php echo $val->id ?>">
-                                    <?php echo $val->size ?></option>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="size[]" value="<?php echo $val->id ?>"
+                                            class="form-check-input" id="<?php echo "check" . $val->id ?>"
+                                            <?php if(!empty($val->checked) && $val->checked == true){?> checked <?php }?>>
+                                        <label class="form-check-label"
+                                            for="<?php echo "check" . $val->id?>"><?php echo $val->size ?></label>
+                                    </div>
+                                </div>
                                 <?php }; ?>
-                            </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="thumbnail">Ảnh đại diện</label>

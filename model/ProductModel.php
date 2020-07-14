@@ -5,16 +5,16 @@ class ProductModel extends Model
     /**
      * Lấy danh sách phần tử
      */
-    public function getListAll()
+    public function getListAll($orderBy = 'created_at', $orderDir = 'DESC')
     {
-        return parent::_getListAll("Select * from `$this->table` order by created_at DESC");
+        return parent::_getListAll("Select * from `$this->table` order by $orderBy $orderDir");
     }
     /**
      * Lấy danh sách phần tử ngoài trang client
      */
-    public function getListHasPagination($from, $recordPerPage, $categoryId)
+    public function getListHasPagination($from, $recordPerPage, $categoryId, $orderBy = 'created_at', $orderDir = 'DESC')
     {
-        return parent::_getListAll("Select * from `$this->table` where category_id = $categoryId order by created_at DESC limit $from, $recordPerPage");
+        return parent::_getListAll("Select * from `$this->table` where category_id = $categoryId order by $orderBy $orderDir limit $from, $recordPerPage");
     }
     /**
      * Lấy danh sách sản phẩm liên quan

@@ -53,7 +53,7 @@
                                     style="width: 80px; height: 80px; object-fit: cover">
                                 <?php } ?>
                             </td>
-                            <td><?php echo number_format($val->price, 1, ".", "."); ?> VNĐ</td>
+                            <td><?php echo number_format($val->price, 0, ".", "."); ?> VNĐ</td>
                             <td><?php echo $val->sale ?>%</td>
                             <td><?php echo $val->quantity ?></td>
                             <td class="text-center">
