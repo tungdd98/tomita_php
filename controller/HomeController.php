@@ -10,7 +10,12 @@ class HomeController extends BaseController
     {
         $this->model = new Model();
         $this->modelCategory = new CategoryModel();
-        $this->loadView("client/home/index", array('products' => $this->model->_getListAll("Select * from products limit 12")));
+        $data = array(
+            'products' => $this->model->_getListAll("Select * from products limit 12"),
+            'mens' => $this->model->_getListAll("Select * from products where id = 99 limit 12"),
+            'womens' => $this->model->_getListAll("Select * from products where id = 98 limit 12"),
+        );
+        $this->loadView("client/home/index", $data);
         $this->setTemplate("base/client/index", array('categories' => $this->modelCategory->getListAll()));
     }
 }
