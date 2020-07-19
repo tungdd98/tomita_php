@@ -73,12 +73,15 @@
                                         <?php } else {?>
                                         <div class="text-danger font-weight-bold" style="font-size: 18px">Liên hệ</div>
                                         <?php } ?>
+                                        <?php if($val->quantity <= 0) { ?>
+                                        <div>Hết hàng</div>
+                                        <?php } ?>
                                     </div>
                                     <?php if($val->sale > 0) {?>
                                     <span class="sales">-<?php echo $val->sale ?>%</span>
                                     <?php }?>
                                     <div class="control">
-                                        <?php if($val->price != 0) { ?>
+                                        <?php if($val->quantity > 0) { ?>
                                         <button title="" class="add-cart btn-crt"
                                             onclick="addCart(<?php echo $val->id ?>, 1, true)"><i
                                                 class="fa fa-cart-plus"></i></button>

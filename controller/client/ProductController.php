@@ -18,10 +18,15 @@ class ProductController extends BaseController
         switch ($action) {
             case 'detail':
                 $product = $this->model->getRecord($id);
+                $size = $this->model->_getListAll("Select * from product_size where product_id = $id");
+                foreach ($size as $key => $val) {
+                    $arrSize[] = $this->model->_getRecord("Select * from sizes where id = $val->size_id")->size;
+                }
                 $data = array(
                     'product' => $product,
                     'category' => $this->modelCategory->getRecord($product->category_id),
                     'related' => $this->model->getListRelate($product->category_id),
+                    'sizes' => $arrSize
                 );
                 $this->loadView("client/product-detail/index", $data);
                 break;

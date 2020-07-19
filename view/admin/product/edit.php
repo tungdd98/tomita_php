@@ -9,11 +9,6 @@ document.title = 'Quản lý sản phẩm'
                 <div class="row">
                     <div class="col-md-8 col-sm-12">
                         <div class="form-group">
-                            <label for="title">Tên sản phẩm <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="title" required name="title"
-                                value="<?php echo !empty($record->title) ? $record->title : '' ?>">
-                        </div>
-                        <div class="form-group">
                             <label for="category">Danh mục</label>
                             <select class="form-control" id="category" name="categoryId" required>
                                 <option value="" <?php if(empty($record)) { ?> selected <?php } ?> disabled>--- Chọn ---
@@ -24,6 +19,11 @@ document.title = 'Quản lý sản phẩm'
                                     <?php echo $val->title ?></option>
                                 <?php }; ?>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Tên sản phẩm <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="title" required name="title"
+                                value="<?php echo !empty($record->title) ? $record->title : '' ?>">
                         </div>
                         <div class="form-group">
                             <label for="description">Mô tả</label>

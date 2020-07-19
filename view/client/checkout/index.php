@@ -22,7 +22,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Số điện thoại</label>
-                            <input type="text" class="form-control" id="phone" name="phone" required
+                            <input type="text" class="form-control" id="phone" name="phone" required pattern="[0-9]{10}"
                                 value="<?php echo !empty($user->phone) ? $user->phone : '' ?>">
                         </div>
                         <div class="form-group">
@@ -57,7 +57,7 @@
                             <div class="h6 info">10đ</div>
                         </div>
                         <div class="d-flex justify-content-end pt-5">
-                            <button class="v-button" onclick="checkout()">Thanh toán</button>
+                            <button class="v-button" onclick="checkout()">Mua hàng</button>
                         </div>
                     </div>
                 </div>

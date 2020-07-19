@@ -320,6 +320,18 @@ $(document).on("change", ".js-size", function (e) {
     success: function (result) {},
   });
 });
+$(document).on("change", "#detail-select", function (e) {
+  const _this = this;
+  $.ajax({
+    url: `/clothes/?controller=cart&action=size`,
+    type: "GET",
+    data: {
+      id: $(_this).data("id"),
+      size: $(_this).val(),
+    },
+    success: function (result) {},
+  });
+});
 $(document).ready(function () {
   setLoading();
   loadCart();

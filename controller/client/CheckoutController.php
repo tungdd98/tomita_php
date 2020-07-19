@@ -61,7 +61,7 @@ class CheckoutController extends BaseController
     {
         $sum = 0;
         foreach ($_SESSION['cart'] as $key => $val) {
-            $sum += $val['priceSale'];
+            $sum += $val['priceSale'] * $val['number'];
         }
         return $sum;
     }

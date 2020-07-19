@@ -68,17 +68,31 @@
                                 </strong><?php echo $product->quantity > 0 ? 'Còn hàng' : 'Hết hàng' ?></li>
                         </ul>
                         <div class="pro-quantity">
-                            <span>Số lượng :</span>
+                            <span>Số lượng: </span>
                             <div class="i-number">
                                 <button class="n-ctrl down smooth"></button>
                                 <input type="text" class="numberic" min="1" max="1000" value="1" id="input-detail">
                                 <button class="n-ctrl up smooth"></button>
                             </div>
                         </div>
+                        <div class="mt-3">
+                            <div class="form-group d-flex align-items-center">
+                                <label class="pr-2">Kích thước: </label>
+                                <div>
+                                    <select name="sizes" data-id="<?php echo $product->id ?>" id="detail-select" class="form-control form-control-sm" style="width: 80px">
+                                        <?php foreach($sizes as $key => $val){ ?>
+                                        <option value="<?php echo $val ?>"><?php echo $val ?></option>
+                                        <?php }?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <?php if($product->quantity > 0) { ?>
                         <div class="btn-addcart" onclick="addCartDetail(<?php echo $product->id ?>)">
                             <a href="javascript:;" title="">Thêm vào giỏ hàng</a>
                         </div>
-                        <div class="pro-socials">
+                        <?php }?>
+                        <div class="pro-socials mt-5">
                             <span>Chia sẻ : </span>
                             <ul>
                                 <li><a href="" title=""><i class="social_facebook"></i></a></li>
@@ -119,6 +133,9 @@
                             </div>
                             <?php } ?>
                         </div>
+                        <?php if($val->quantity <= 0) { ?>
+                        <div>Hết hàng</div>
+                        <?php } ?>
                         <?php } else {?>
                         <div class="text-danger font-weight-bold" style="font-size: 18px">Liên hệ</div>
                         <?php } ?>
@@ -127,7 +144,7 @@
                         <span class="sales">-<?php echo $val->sale ?>%</span>
                     <?php }?>
                     <div class="control">
-                        <?php if($val->price != 0) { ?>
+                        <?php if($val->quantity > 0) { ?>
                         <button title="" class="add-cart btn-crt" onclick="addCart(<?php echo $val->id ?>, 1, true)"><i
                                 class="fa fa-cart-plus"></i></button>
                         <?php } ?>

@@ -37,7 +37,7 @@
     <li class="nav-item">
         <a class="nav-link" href="admin/import">
             <i class="fas fa-fw fa-wrench"></i>
-            <span>Đơn nhập hàng</span></a>
+            <span>Đơn hàng nhập</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="admin/article">
