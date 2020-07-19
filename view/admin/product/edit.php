@@ -1,6 +1,11 @@
 <script>
 document.title = 'Quản lý sản phẩm'
 </script>
+<?php 
+    // echo "<pre>";
+    // print_r($sizes);
+    // echo "</pre>";
+?>
 <div class="container-fluid">
     <h1 class="h3 mb-2 text-gray-800"><?php echo !empty($record) ? 'Cập nhật sản phẩm' : 'Thêm mới sản phẩm' ?></h1>
     <div class="card shadow mb-4">

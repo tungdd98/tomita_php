@@ -29,12 +29,12 @@
                 <div class="head-crt">
                     <div class="head-search">
                         <span class="ic-search"><i class="icon_search"></i></span>
-                        <div class="form-search">
+                        <form class="form-search" method="POST" action="/clothes/index.php?controller=search">
                             <div class="form-group">
-                                <input type="text" placeholder="Tìm kiếm ...">
+                                <input type="text" placeholder="Tìm kiếm ..." name="search">
                                 <button type="submit"><i class="icon_search"></i></button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="head-lang">
                         <img src="public/frontend/images/lang-vi.jpg" alt="">

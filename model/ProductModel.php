@@ -12,9 +12,13 @@ class ProductModel extends Model
     /**
      * Lấy danh sách phần tử ngoài trang client
      */
-    public function getListHasPagination($from, $recordPerPage, $categoryId, $orderBy = 'created_at', $orderDir = 'DESC')
+    public function getListHasPagination($from, $recordPerPage, $categoryId, $orderBy = 'created_at', $orderDir = 'DESC', $start = 0, $end = 0)
     {
-        return parent::_getListAll("Select * from `$this->table` where category_id = $categoryId order by $orderBy $orderDir limit $from, $recordPerPage");
+        if($start == 0) {
+            return parent::_getListAll("Select * from `$this->table` where category_id = $categoryId order by $orderBy $orderDir limit $from, $recordPerPage");
+        } else {
+            return parent::_getListAll("Select * from `$this->table` where category_id = $categoryId and price between $start and $end limit $from, $recordPerPage");
+        }
     }
     /**
      * Lấy danh sách sản phẩm liên quan
