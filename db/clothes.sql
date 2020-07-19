@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 14, 2020 lúc 10:42 PM
+-- Thời gian đã tạo: Th7 19, 2020 lúc 07:19 PM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.4.2
 
@@ -56,7 +56,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `title`, `parent_id`, `created_at`) VALUES
-(27, 'Quần áo', 0, '2020-07-14 19:48:51');
+(27, 'Quần áo', 0, '2020-07-14 19:48:51'),
+(98, 'Thời trang nữ', 0, '2020-07-19 17:14:48'),
+(99, 'Thời trang nam', 0, '2020-07-19 17:14:45');
 
 -- --------------------------------------------------------
 
@@ -77,7 +79,7 @@ CREATE TABLE `imports` (
 --
 
 INSERT INTO `imports` (`id`, `product_id`, `quantity`, `price`, `created_at`) VALUES
-(9, 9, 1000, 900000, '2020-07-14 19:50:01');
+(10, 10, 1000, 900000, '2020-07-19 16:50:39');
 
 -- --------------------------------------------------------
 
@@ -98,7 +100,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `status`, `total`, `created_at`) VALUES
-(33, 1, 1, 850000, '2020-07-14 19:55:17');
+(34, 1, 0, 4675000, '2020-07-19 16:39:48'),
+(35, 1, 0, 5610000, '2020-07-19 17:12:51');
 
 -- --------------------------------------------------------
 
@@ -120,7 +123,8 @@ CREATE TABLE `orders_detail` (
 --
 
 INSERT INTO `orders_detail` (`id`, `order_id`, `number`, `product_id`, `size`, `created_at`) VALUES
-(14, 33, 4, 9, '', '2020-07-14 19:50:33');
+(15, 34, 5, 10, 'M', '2020-07-19 16:39:48'),
+(16, 35, 6, 10, '31', '2020-07-19 17:12:51');
 
 -- --------------------------------------------------------
 
@@ -147,7 +151,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `title`, `description`, `content`, `price`, `sale`, `quantity`, `thumbnail`, `images`, `created_at`) VALUES
-(9, 27, 'Nike Swoosh Icon Clash', '<p>Made with sweat-wicking stretch, the Nike Swoosh Icon Clash Sports Bra feels comfortable and supportive. The wild print celebrates the power of femininity in sport. A removable 1-piece pad makes life easy. This product is made from at least 75% recycled polyester fabric.</p>\r\n', '<p>Made with sweat-wicking stretch, the Nike Swoosh Icon Clash Sports Bra feels comfortable and supportive. The wild print celebrates the power of femininity in sport. A removable 1-piece pad makes life easy. This product is made from at least 75% recycled polyester fabric.</p>\r\n', 1000000, 15, 996, '15947561831.jpg', '[\"15947561831.jpg\",\"1.jpg\",\"2.jpg\",\"3.jpg\",\"4.jpg\",\"5.jpg\"]', '2020-07-14 19:49:43');
+(10, 27, 'Nike Swoosh Icon Clash', '<p>Nike Swoosh Icon Clash</p>\r\n', '<p>Nike Swoosh Icon Clash</p>\r\n', 1100000, 15, 989, '15951767441.jpg', '[\"15951767441.jpg\",\"1.jpg\",\"2.jpg\",\"3.jpg\",\"4.jpg\",\"5.jpg\"]', '2020-07-19 16:39:04');
 
 -- --------------------------------------------------------
 
@@ -168,7 +172,10 @@ CREATE TABLE `product_size` (
 INSERT INTO `product_size` (`id`, `product_id`, `size_id`) VALUES
 (7, 9, 1),
 (8, 9, 3),
-(9, 9, 5);
+(9, 9, 5),
+(10, 10, 1),
+(11, 10, 3),
+(12, 10, 5);
 
 -- --------------------------------------------------------
 
@@ -216,7 +223,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `phone`, `address`, `thumbnail`, `rule`, `created_at`) VALUES
-(1, 'tungdd98@gmail.com', '202cb962ac59075b964b07152d234b70', 'Đặng Đức Tùnggg', '09737937111', 'số 44 ngõ 421 phường Xuân Đỉnhggg', '1594567240cat_minimalism_vector_wire_102411_1920x1080.jpg', 1, '2020-07-14 19:34:51'),
+(1, 'tungdd98@gmail.com', '202cb962ac59075b964b07152d234b70', 'Đặng Đức Tùng', '0645454541', 'số 44 ngõ 421 phường Xuân Đỉnh', '1594567240cat_minimalism_vector_wire_102411_1920x1080.jpg', 1, '2020-07-19 16:51:16'),
 (3, 'tungdd@gmail.com', '202cb962ac59075b964b07152d234b70', 'Tùng', '123', '123', NULL, 0, '2020-07-12 16:51:29');
 
 --
@@ -293,37 +300,37 @@ ALTER TABLE `articles`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT cho bảng `imports`
 --
 ALTER TABLE `imports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT cho bảng `orders_detail`
 --
 ALTER TABLE `orders_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `product_size`
 --
 ALTER TABLE `product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `sizes`
