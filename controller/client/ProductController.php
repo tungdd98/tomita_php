@@ -34,7 +34,7 @@ class ProductController extends BaseController
                 $orderBy = isset($_GET['orderBy']) ? $_GET['orderBy'] : '';
                 $orderDir = isset($_GET['orderDir']) ? $_GET['orderDir'] : '';
                 $data = array(
-                    'products' => $this->getList($id, $orderBy, $orderDir),
+                    'products' => $this->getList($id, $orderBy, $orderDir, 0, 0, true),
                     'categoryId' => $id,
                     'breadcrumbs' => $this->modelCategory->getRecord($id)->title,
                     'categories' => $categories,
@@ -45,7 +45,7 @@ class ProductController extends BaseController
                 $start = (float) $_POST['start'];
                 $end = (float) $_POST['end'];
                 $data = array(
-                    'products' => $this->getList($id, "created_at", "DESC", $start, $end),
+                    'products' => $this->getList($id, "created_at", "DESC", $start, $end, false),
                     'categoryId' => $id,
                     'breadcrumbs' => $this->modelCategory->getRecord($id)->title,
                     'categories' => $categories,
@@ -68,14 +68,14 @@ class ProductController extends BaseController
     /**
      * Lấy danh sách sản phẩm
      */
-    public function getList($id, $orderBy = 'created_at', $orderDir = 'DESC', $start = 0, $end = 0)
+    public function getList($id, $orderBy = 'created_at', $orderDir = 'DESC', $start = 0, $end = 0, $flag = true)
     {
         $recordPerPage = 9;
         $totalRecord = $this->model->getRowCount($id);
         $numberPage = ceil($totalRecord / $recordPerPage);
         $page = isset($_GET['page']) && $_GET['page'] > 0 ? $_GET['page'] - 1 : 0;
         $from = $page * $recordPerPage;
-        $data = $this->model->getListHasPagination($from, $recordPerPage, $id, $orderBy, $orderDir, $start, $end);
+        $data = $this->model->getListHasPagination($from, $recordPerPage, $id, $orderBy, $orderDir, $start, $end, $flag);
 
         return array(
             'data' => $data,

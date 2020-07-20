@@ -20,7 +20,7 @@ document.title = 'Quản lý sản phẩm'
                                 </option>
                                 <?php foreach($categories as $key => $val) { ?>
                                 <option value="<?php echo $val->id ?>"
-                                    <?php if(!empty($record) && $record->id === $val->id) {?> selected <?php } ?>>
+                                    <?php if(!empty($record) && $record->category_id === $val->id) {?> selected <?php } ?>>
                                     <?php echo $val->title ?></option>
                                 <?php }; ?>
                             </select>
