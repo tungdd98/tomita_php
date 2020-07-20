@@ -47,7 +47,7 @@
     </div>
     <?php include "{$COMPONENT_URL}/popup-login.php"; ?>
     <?php include "{$COMPONENT_URL}/popup-cart.php"; ?>
-    <!-- <script>
+    <script>
     ! function(s, u, b, i, z) {
         var r, m;
         s[i] || (s._sbzaccid = z, s[i] = function() {
@@ -62,7 +62,7 @@
                 .async = 1, n.src = t, c.parentNode.insertBefore(n, c), setTimeout(m, 2e3, e + 1))
         })(0))
     }(window, document, "script", "subiz", "acqsgdjhqqlaxhusaovu");
-    </script> -->
+    </script>
 </body>
 
 </html>

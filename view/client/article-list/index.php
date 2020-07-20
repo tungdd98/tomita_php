@@ -15,9 +15,15 @@
                 <?php foreach($articles as $key => $val) {?>
                 <div class="col-md-6">
                     <div class="item-news">
-                        <a href="news-details.html" title="" class="img-primary"><img src="images/news1.jpg" alt=""></a>
+                        <a href="article/<?php echo $val->id ?>" title="" class="img-primary">
+                            <?php if(file_exists("public/upload/article/" . $val->thumbnail) && !empty($val->thumbnail)) { ?>
+                            <img src="public/upload/article/<?php echo $val->thumbnail; ?>" style="max-height: 300px; object-fit: cover">
+                            <?php } else {; ?>
+                            <img src="public/upload/no-image.jpg" style="max-height: 300px; object-fit: cover">
+                            <?php } ?>
+                        </a>
                         <div class="ct">
-                            <h3 class="title"><a href="news-details.html" title=""><?php echo $val->title ?></a></h3>
+                            <h3 class="title"><a href="article/<?php echo $val->id ?>" title=""><?php echo $val->title ?></a></h3>
                             <div class="desc"><?php echo $val->description ?></div>
                             <div class="control">
                                 <span class="time"><i class="icon_clock_alt"></i> <?php echo $val->created_at ?></span>

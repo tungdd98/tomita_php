@@ -51,7 +51,7 @@ class ProductController extends BaseController
                     'categories' => $categories,
                 );
                 $this->loadView("client/product-list/index", $data);
-                $this->setTemplate("base/client/index", array('categories' => $categories));
+                
                 break;
             default:
                 $data = array(
@@ -61,10 +61,9 @@ class ProductController extends BaseController
                     'categories' => $categories,
                 );
                 $this->loadView("client/product-list/index", $data);
-                $this->setTemplate("base/client/index", array('categories' => $categories));
                 break;
         }
-
+        $this->setTemplate("base/client/index", array('categories' => $categories));
     }
     /**
      * Lấy danh sách sản phẩm

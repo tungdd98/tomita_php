@@ -75,6 +75,7 @@ RewriteRule ^sales$ index.php?controller=sale
 
 #article
 RewriteRule ^article$ index.php?controller=article
+RewriteRule ^article/([0-9]+) index.php?controller=article&id=$1&action=detail
 
 #faq
 RewriteRule ^faq$ index.php?controller=faq
