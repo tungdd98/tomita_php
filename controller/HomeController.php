@@ -12,8 +12,8 @@ class HomeController extends BaseController
         $this->modelCategory = new CategoryModel();
         $data = array(
             'products' => $this->model->_getListAll("Select * from products limit 12"),
-            'mens' => $this->model->_getListAll("Select * from products where id = 99 limit 12"),
-            'womens' => $this->model->_getListAll("Select * from products where id = 98 limit 12"),
+            'mens' => $this->model->_getListAll("Select * from products where category_id = 99 limit 12"),
+            'womens' => $this->model->_getListAll("Select * from products where category_id = 98 limit 12"),
         );
         $this->loadView("client/home/index", $data);
         $this->setTemplate("base/client/index", array('categories' => $this->modelCategory->getListAll()));
