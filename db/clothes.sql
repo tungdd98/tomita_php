@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 19, 2020 lúc 07:19 PM
+-- Thời gian đã tạo: Th7 22, 2020 lúc 06:36 PM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.4.2
 
@@ -56,7 +56,6 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `title`, `parent_id`, `created_at`) VALUES
-(27, 'Quần áo', 0, '2020-07-14 19:48:51'),
 (98, 'Thời trang nữ', 0, '2020-07-19 17:14:48'),
 (99, 'Thời trang nam', 0, '2020-07-19 17:14:45');
 
@@ -79,7 +78,8 @@ CREATE TABLE `imports` (
 --
 
 INSERT INTO `imports` (`id`, `product_id`, `quantity`, `price`, `created_at`) VALUES
-(10, 10, 1000, 900000, '2020-07-19 16:50:39');
+(13, 13, 200, 600000, '2020-07-22 16:19:34'),
+(14, 12, 300, 500000, '2020-07-22 16:33:23');
 
 -- --------------------------------------------------------
 
@@ -100,8 +100,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `status`, `total`, `created_at`) VALUES
-(34, 1, 0, 4675000, '2020-07-19 16:39:48'),
-(35, 1, 0, 5610000, '2020-07-19 17:12:51');
+(38, 1, 0, 3060000, '2020-07-22 16:34:38');
 
 -- --------------------------------------------------------
 
@@ -123,8 +122,8 @@ CREATE TABLE `orders_detail` (
 --
 
 INSERT INTO `orders_detail` (`id`, `order_id`, `number`, `product_id`, `size`, `created_at`) VALUES
-(15, 34, 5, 10, 'M', '2020-07-19 16:39:48'),
-(16, 35, 6, 10, '31', '2020-07-19 17:12:51');
+(20, 38, 2, 13, '', '2020-07-22 16:34:38'),
+(21, 38, 2, 12, '', '2020-07-22 16:34:38');
 
 -- --------------------------------------------------------
 
@@ -151,7 +150,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `title`, `description`, `content`, `price`, `sale`, `quantity`, `thumbnail`, `images`, `created_at`) VALUES
-(10, 27, 'Nike Swoosh Icon Clash', '<p>Nike Swoosh Icon Clash</p>\r\n', '<p>Nike Swoosh Icon Clash</p>\r\n', 1100000, 15, 989, '15951767441.jpg', '[\"15951767441.jpg\",\"1.jpg\",\"2.jpg\",\"3.jpg\",\"4.jpg\",\"5.jpg\"]', '2020-07-19 16:39:04');
+(12, 98, 'Nike Swoosh Icon Clash', '<h1>Nike Swoosh Icon Clash</h1>\r\n', '<h1>Nike Swoosh Icon Clash</h1>\r\n', 900000, 10, 298, '15954344701.jpg', '[\"15954344701.jpg\",\"1.jpg\",\"2.jpg\",\"3.jpg\",\"4.jpg\",\"5.jpg\"]', '2020-07-22 16:14:30'),
+(13, 98, 'Nike x MadeMe', '<h1>Nike x MadeMe</h1>\r\n', '<h1>Nike x MadeMe</h1>\r\n', 800000, 10, 198, '1595434530mademe-bra-t514cK (2).jpg', '[\"1595434530mademe-bra-t514cK (2).jpg\",\"mademe-bra-t514cK (1).jpg\",\"mademe-bra-t514cK (2).jpg\",\"mademe-bra-t514cK.jpg\"]', '2020-07-22 16:15:30');
 
 -- --------------------------------------------------------
 
@@ -170,12 +170,14 @@ CREATE TABLE `product_size` (
 --
 
 INSERT INTO `product_size` (`id`, `product_id`, `size_id`) VALUES
-(7, 9, 1),
-(8, 9, 3),
-(9, 9, 5),
-(10, 10, 1),
-(11, 10, 3),
-(12, 10, 5);
+(23, 12, 1),
+(24, 12, 2),
+(25, 12, 3),
+(26, 12, 5),
+(27, 13, 1),
+(28, 13, 2),
+(29, 13, 3),
+(30, 13, 4);
 
 -- --------------------------------------------------------
 
@@ -253,13 +255,16 @@ ALTER TABLE `imports`
 -- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `orders_detail`
 --
 ALTER TABLE `orders_detail`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Chỉ mục cho bảng `products`
@@ -272,7 +277,9 @@ ALTER TABLE `products`
 -- Chỉ mục cho bảng `product_size`
 --
 ALTER TABLE `product_size`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `size_id` (`size_id`);
 
 --
 -- Chỉ mục cho bảng `sizes`
@@ -294,43 +301,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT cho bảng `imports`
 --
 ALTER TABLE `imports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT cho bảng `orders_detail`
 --
 ALTER TABLE `orders_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `product_size`
 --
 ALTER TABLE `product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `sizes`
@@ -355,10 +362,30 @@ ALTER TABLE `imports`
   ADD CONSTRAINT `imports_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Các ràng buộc cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `orders_detail`
+--
+ALTER TABLE `orders_detail`
+  ADD CONSTRAINT `orders_detail_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_detail_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Các ràng buộc cho bảng `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `product_size`
+--
+ALTER TABLE `product_size`
+  ADD CONSTRAINT `product_size_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `product_size_ibfk_2` FOREIGN KEY (`size_id`) REFERENCES `sizes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

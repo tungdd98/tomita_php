@@ -19,7 +19,7 @@ class OrderModel extends Model
     /**
      * Lấy số bản ghi
      */
-    
+
     public function getRowCount()
     {
         return parent::_getRowCount("Select id from `$this->table`");
@@ -87,5 +87,18 @@ class OrderModel extends Model
     public function getToTalOrderByMonth($month)
     {
         return parent::_getRowCount("Select id from `$this->table` where month(created_at) = $month");
+    }
+    /**
+     * Tính lãi
+     */
+    public function getInterest()
+    {
+        $orderInsert = parent::_getListAll("Select * from imports");
+        $total = 0;
+        foreach ($orderInsert as $key => $val) {
+            $product = parent::_getRecord("Select * from products where id = $val->product_id");
+            $total += (int) ($val->quantity - $product->quantity) * (float) (($product->price - $product->price * $product->sale / 100) - $val->price);
+        }
+        return $total;
     }
 }

@@ -37,7 +37,8 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Tổng đơn hàng trong tháng</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="total-order"><?php echo $totalOrder ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="total-order">
+                                <?php echo $totalOrder ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -103,8 +104,10 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Tiền lãi trong tháng</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                Tiền lãi</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo number_format($interest, 0, ".", ".")?> <span>đ</span>
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>

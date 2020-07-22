@@ -13,6 +13,7 @@ class AdminController extends BaseController
             'totalOrder' => $this->modelOrder->getToTalOrderByMonth($month),
             'totalMoney' => $this->modelOrder->getTotal($month),
             'totalCustomer' => $this->modelOrder->getTotalCustomer($month),
+            'interest' => $this->modelOrder->getInterest()
         );
         switch ($action) {
             case 'filter':
