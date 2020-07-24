@@ -25,7 +25,7 @@ class CheckoutController extends BaseController
 
         $data = array(
             'categories' => $this->modelCategory->getListAll(),
-            'user' => $this->modelUser->getRecord($_SESSION['id']),
+            'user' => isset($_SESSION['id']) ? $this->modelUser->getRecord($_SESSION['id']) : null,
         );
         $action = !empty($_GET['action']) ? $_GET['action'] : '';
         switch ($action) {

@@ -316,6 +316,16 @@ $(document).on("change", ".js-size", function (e) {
     },
   });
 });
+$(document).on("click", ".n-ctrl.up", function () {
+  const id = $(this).data("id");
+  const size = $("#detail-select").val();
+  addCart(id, 1, size, false);
+});
+$(document).on("click", ".n-ctrl.down", function () {
+  const id = $(this).data("id");
+  const size = $("#detail-select").val();
+  addCart(id, -1, size, false);
+});
 $(document).ready(function () {
   setLoading();
   loadCart();
