@@ -197,11 +197,15 @@ const renderCart = (data) => {
           </td>
           <td>
             <div class="i-number">
-                <button class="n-ctrl down smooth" data-id="${row.id}"></button>
+                <button class="n-ctrl down smooth js-down" data-id="${
+                  row.id
+                }"></button>
                 <input type="text" class="numberic" min="1" max="1000" value="${
                   row.number
                 }">
-                <button class="n-ctrl up smooth" data-id="${row.id}"></button>
+                <button class="n-ctrl up smooth js-up" data-id="${
+                  row.id
+                }"></button>
             </div>
           </td>
           <td>
@@ -316,12 +320,12 @@ $(document).on("change", ".js-size", function (e) {
     },
   });
 });
-$(document).on("click", ".n-ctrl.up", function () {
+$(document).on("click", ".js-up", function () {
   const id = $(this).data("id");
   const size = $("#detail-select").val();
   addCart(id, 1, size, false);
 });
-$(document).on("click", ".n-ctrl.down", function () {
+$(document).on("click", ".js-down", function () {
   const id = $(this).data("id");
   const size = $("#detail-select").val();
   addCart(id, -1, size, false);

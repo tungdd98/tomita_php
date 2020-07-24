@@ -145,7 +145,7 @@
                     <div class="control">
                         <?php if ($val->quantity > 0) {?>
                         <button title="" class="add-cart btn-crt"
-                            onclick="addCart(<?php echo $val->id ?>, 1, '', true)"><i
+                            onclick="addCart(<?php echo $val->id ?>, 1, `<?php echo isset($_SESSION['cart']) && isset($_SESSION['cart'][$val->id]) ? $_SESSION['cart'][$val->id]['size'] : '' ?>`, true)"><i
                                 class="fa fa-cart-plus"></i></button>
                         <?php }?>
                         <a href="product/<?php echo $val->id ?>" title="" class="view-details btn-crt"><i
