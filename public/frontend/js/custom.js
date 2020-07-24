@@ -166,7 +166,9 @@ const renderCart = (data) => {
     data.forEach((row) => {
       const selectSize = JSON.parse(row.selectSize);
       for (const size of selectSize) {
-        sizes += `<option value="${size}">${size}</option>`;
+        sizes += `<option value="${size}" ${
+          size === row.size ? "selected" : ""
+        }>${size}</option>`;
       }
       const thumbnail = row.thumbnail
         ? `public/upload/product/${row.thumbnail}`
@@ -317,7 +319,9 @@ $(document).on("change", ".js-size", function (e) {
       id: $(_this).data("id"),
       size: $(_this).val(),
     },
-    success: function (result) {},
+    success: function (result) {
+      renderCart(Object.values(JSON.parse(result)));
+    },
   });
 });
 $(document).on("change", "#detail-select", function (e) {
@@ -329,7 +333,9 @@ $(document).on("change", "#detail-select", function (e) {
       id: $(_this).data("id"),
       size: $(_this).val(),
     },
-    success: function (result) {},
+    success: function (result) {
+      renderCart(Object.values(JSON.parse(result)));
+    },
   });
 });
 $(document).ready(function () {
