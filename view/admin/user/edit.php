@@ -21,7 +21,7 @@ document.title = 'Quản lý tài khoản'
                         <div class="form-group">
                             <label for="password">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="password" required name="password"
-                                <?php if(!empty($record)) { ?> disabled <?php } ?>>
+                                <?php if (!empty($record)) {?> disabled <?php }?>>
                         </div>
                         <div class="form-group">
                             <label for="phone">Số điện thoại</label>
@@ -38,6 +38,17 @@ document.title = 'Quản lý tài khoản'
                         <div class="form-group">
                             <label for="thumbnail">Ảnh đại diện</label>
                             <input type="file" class="form-control-file" id="thumbnail" name="thumbnail">
+                        </div>
+                        <div class="form-group">
+                            <label for="rule">Phân quyền</label>
+                            <select class="form-control" id="parent" name="rule">
+                                <option value="1"
+                                    <?php if (isset($record) && $record->rule == '1') {?>selected<?php }?>>Admin
+                                </option>
+                                <option value="0"
+                                    <?php if (isset($record) && $record->rule == '0') {?>selected<?php }?>>Member
+                                </option>
+                            </select>
                         </div>
                     </div>
                 </div>

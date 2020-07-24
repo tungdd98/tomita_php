@@ -91,6 +91,7 @@ class UserController extends BaseController
             'phone' => $_POST['phone'],
             'address' => $_POST['address'],
             'thumbnail' => $thumbnail,
+            'rule' => $_POST['rule'],
         ));
         global $APP_URL;
         header("location:$APP_URL/$this->path&status=add");
@@ -117,6 +118,7 @@ class UserController extends BaseController
             'email' => $_POST['email'],
             'phone' => $_POST['phone'],
             'address' => $_POST['address'],
+            'rule' => $_POST['rule'],
         ));
         if ($_FILES["thumbnail"]["name"] != "") {
             $oldThumbnail = $this->model->getRecord($id)->thumbnail;
