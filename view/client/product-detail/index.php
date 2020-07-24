@@ -83,7 +83,7 @@
                                         class="form-control form-control-sm" style="width: 80px">
                                         <?php foreach ($sizes as $key => $val) {?>
                                         <option value="<?php echo $val ?>"
-                                            <?php if ($val == $_SESSION['cart'][$product->id]['size']) {?>selected<?php }?>>
+                                            <?php if (isset($_SESSION['cart']) && isset($_SESSION['cart'][$product->id]) && $val == $_SESSION['cart'][$product->id]['size']) {?>selected<?php }?>>
                                             <?php echo $val ?></option>
                                         <?php }?>
                                     </select>
