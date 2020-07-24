@@ -1,6 +1,3 @@
-<?php 
-    echo $products['numberPage'];
-?>
 <section class="page-product page-primary">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -49,81 +46,84 @@
                                 </div>
                             </div>
                         </div>
-                        <?php if(count($products['data']) > 0) { ?>
+                        <?php if (count($products['data']) > 0) {?>
                         <div class="row">
-                            <?php foreach($products['data'] as $key => $val) { ?>
+                            <?php foreach ($products['data'] as $key => $val) {?>
                             <div class="col-lg-4 col-sm-6">
                                 <div class="item-product">
                                     <a href="product/<?php echo $val->id ?>" title="" class="img-primary">
-                                        <?php if(file_exists("public/upload/product/" . $val->thumbnail) && !empty($val->thumbnail)) { ?>
+                                        <?php if (file_exists("public/upload/product/" . $val->thumbnail) && !empty($val->thumbnail)) {?>
                                         <img src="public/upload/product/<?php echo $val->thumbnail; ?>">
-                                        <?php } else {; ?>
+                                        <?php } else {;?>
                                         <img src="public/upload/no-image.jpg">
-                                        <?php } ?>
+                                        <?php }?>
                                     </a>
                                     <div class="ct">
                                         <h3 class="title"><a href="product/<?php echo $val->id ?>"
                                                 title=""><?php echo $val->title ?></a></h3>
-                                        <?php if($val->price > 0) { ?>
+                                        <?php if ($val->price > 0) {?>
                                         <div class="price">
                                             <span><strong><?php echo number_format(getPrice($val->price, $val->sale), 0, ".", "."); ?>
                                                     VNĐ</strong></span>
-                                            <?php if($val->sale != 0) { ?>
+                                            <?php if ($val->sale != 0) {?>
                                             <div><del><?php echo number_format($val->price, 1, ".", "."); ?> VNĐ</del>
                                             </div>
-                                            <?php } ?>
+                                            <?php }?>
                                         </div>
                                         <?php } else {?>
                                         <div class="text-danger font-weight-bold" style="font-size: 18px">Liên hệ</div>
-                                        <?php } ?>
-                                        <?php if($val->quantity <= 0) { ?>
+                                        <?php }?>
+                                        <?php if ($val->quantity <= 0) {?>
                                         <div>Hết hàng</div>
-                                        <?php } ?>
+                                        <?php }?>
                                     </div>
-                                    <?php if($val->sale > 0) {?>
+                                    <?php if ($val->sale > 0) {?>
                                     <span class="sales">-<?php echo $val->sale ?>%</span>
                                     <?php }?>
                                     <div class="control">
-                                        <?php if($val->quantity > 0) { ?>
+                                        <?php if ($val->quantity > 0) {?>
                                         <button title="" class="add-cart btn-crt"
-                                            onclick="addCart(<?php echo $val->id ?>, 1, true)"><i
+                                            onclick="addCart(<?php echo $val->id ?>, 1, '', true)"><i
                                                 class="fa fa-cart-plus"></i></button>
-                                        <?php } ?>
+                                        <?php }?>
                                         <a href="product/<?php echo $val->id ?>" title=""
                                             class="view-details btn-crt"><i class="fa fa-external-link"></i></a>
                                         <a href="product/<?php echo $val->id ?>" class="link"></a>
                                     </div>
                                 </div>
                             </div>
-                            <?php } ?>
+                            <?php }?>
                         </div>
-                        <?php } else { ?>
+                        <?php } else {?>
                         <div class="text-center py-10">Không có sản phẩm</div>
-                        <?php } ?>
-                        <?php if($products['numberPage'] > 1) { ?>
+                        <?php }?>
+                        <?php if ($products['numberPage'] > 1) {?>
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center">
-                                <?php for($i = 1; $i <= $products['numberPage']; $i++) { ?>
+                                <?php for ($i = 1; $i <= $products['numberPage']; $i++) {?>
                                 <li class="page-item"><a class="page-link"
                                         href="category/<?php echo $categoryId ?>/page=<?php echo $i ?>"><?php echo $i ?></a>
                                 </li>
-                                <?php } ?>
+                                <?php }?>
                             </ul>
                         </nav>
-                        <?php } ?>
+                        <?php }?>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="block-cate-pro mb-2">
                         <h3 class="title" style="font-size: 20px; font-weight: 600">Lọc theo giá</h3>
-                        <form action="/clothes/index.php?controller=product&action=price&id=<?php echo $categoryId ?>" method="POST">
+                        <form action="/clothes/index.php?controller=product&action=price&id=<?php echo $categoryId ?>"
+                            method="POST">
                             <div class="form-group">
                                 <label for="">Từ </label>
-                                <input type="number" class="form-control form-control-sm" name="start" value=<?php echo $products['start'] ?>>
+                                <input type="number" step="50" class="form-control form-control-sm" name="start"
+                                    value=<?php echo $products['start'] ?>>
                             </div>
                             <div class="form-group">
                                 <label for="">Đến </label>
-                                <input type="number" class="form-control form-control-sm" name="end" value=<?php echo $products['end'] ?>>
+                                <input type="number" step="50" class="form-control form-control-sm" name="end"
+                                    value=<?php echo $products['end'] ?>>
                             </div>
                             <button class="btn btn-outline-danger btn-sm" type="submit">Lọc</button>
                         </form>
@@ -131,7 +131,7 @@
                     <div class="sb-product">
                         <div class="block-cate-pro">
                             <h3 class="title">Danh mục sản phẩm</h3>
-                            <?php showCategoriesHor($categories) ?>
+                            <?php showCategoriesHor($categories)?>
                         </div>
                         <div class="block-qc v2">
                             <a href="" title=""><img src="public/frontend/images/bn-qc1.jpg" alt=""></a>

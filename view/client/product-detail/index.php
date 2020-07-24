@@ -1,9 +1,3 @@
-<head>
-    <link href="public/frontend/css/fancybox.css" type="text/css" rel="stylesheet">
-    <link href="public/frontend/css/slick.css" type="text/css" rel="stylesheet">
-    <script src="public/frontend/js/fancybox.js" defer></script>
-    <script src="public/frontend/js/slick.min.js" defer async></script>
-</head>
 <section class="page-product-dt page-primary v2">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -67,34 +61,36 @@
                             <li><strong>Trạng thái :
                                 </strong><?php echo $product->quantity > 0 ? 'Còn hàng' : 'Hết hàng' ?></li>
                         </ul>
-                        <div class="pro-quantity">
-                            <span>Số lượng: </span>
-                            <div class="i-number">
-                                <button class="n-ctrl down smooth"></button>
-                                <input type="text" class="numberic" min="1" max="1000" value="1" id="input-detail">
-                                <button class="n-ctrl up smooth"></button>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <div class="form-group d-flex align-items-center">
-                                <label class="pr-2">Kích thước: </label>
-                                <div>
-                                    <select name="sizes" data-id="<?php echo $product->id ?>" id="detail-select"
-                                        class="form-control form-control-sm" style="width: 80px">
-                                        <?php foreach ($sizes as $key => $val) {?>
-                                        <option value="<?php echo $val ?>"
-                                            <?php if (isset($_SESSION['cart']) && isset($_SESSION['cart'][$product->id]) && $val == $_SESSION['cart'][$product->id]['size']) {?>selected<?php }?>>
-                                            <?php echo $val ?></option>
-                                        <?php }?>
-                                    </select>
+                        <form onsubmit="return false" name="form-detail">
+                            <div class="pro-quantity">
+                                <span>Số lượng: </span>
+                                <div class="i-number">
+                                    <button class="n-ctrl down smooth"></button>
+                                    <input type="text" class="numberic" min="1" max="1000" value="1" id="input-detail">
+                                    <button class="n-ctrl up smooth"></button>
                                 </div>
                             </div>
-                        </div>
-                        <?php if ($product->quantity > 0) {?>
-                        <div class="btn-addcart" onclick="addCartDetail(<?php echo $product->id ?>)">
-                            <a href="javascript:;" title="">Thêm vào giỏ hàng</a>
-                        </div>
-                        <?php }?>
+                            <div class="mt-3">
+                                <div class="form-group d-flex align-items-center">
+                                    <label class="pr-2">Kích thước: </label>
+                                    <div>
+                                        <select name="sizes" data-id="<?php echo $product->id ?>" id="detail-select"
+                                            class="form-control form-control-sm" style="width: 80px">
+                                            <?php foreach ($sizes as $key => $val) {?>
+                                            <option value="<?php echo $val ?>"
+                                                <?php if (isset($_SESSION['cart']) && isset($_SESSION['cart'][$product->id]) && $val == $_SESSION['cart'][$product->id]['size']) {?>selected<?php }?>>
+                                                <?php echo $val ?></option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php if ($product->quantity > 0) {?>
+                            <div class="btn-addcart" onclick="addCartDetail(<?php echo $product->id ?>)">
+                                <a href="javascript:;" title="">Thêm vào giỏ hàng</a>
+                            </div>
+                            <?php }?>
+                        </form>
                         <div class="pro-socials mt-5">
                             <span>Chia sẻ : </span>
                             <ul>
@@ -148,7 +144,8 @@
                     <?php }?>
                     <div class="control">
                         <?php if ($val->quantity > 0) {?>
-                        <button title="" class="add-cart btn-crt" onclick="addCart(<?php echo $val->id ?>, 1, true)"><i
+                        <button title="" class="add-cart btn-crt"
+                            onclick="addCart(<?php echo $val->id ?>, 1, '', true)"><i
                                 class="fa fa-cart-plus"></i></button>
                         <?php }?>
                         <a href="product/<?php echo $val->id ?>" title="" class="view-details btn-crt"><i

@@ -12,9 +12,10 @@ class CartController
         $action = isset($_GET['action']) ? $_GET['action'] : '';
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
         $number = isset($_GET['number']) ? $_GET['number'] : 0;
+        $size = isset($_GET['size']) ? $_GET['size'] : '';
         switch ($action) {
             case 'add':
-                $this->addCart($id, $number);
+                $this->addCart($id, $number, $size);
                 echo $this->getCartList();
                 break;
             case 'destroy':
@@ -39,7 +40,7 @@ class CartController
     /**
      * Thêm mới sản phẩm vào giỏ hàng
      */
-    public function addCart($id, $number = 0)
+    public function addCart($id, $number = 0, $sizeSelect = '')
     {
         $size = $this->model->_getListAll("Select * from product_size where product_id = $id");
         $arrSize = array();
@@ -48,6 +49,7 @@ class CartController
         }
         if (isset($_SESSION['cart'][$id])) {
             $_SESSION['cart'][$id]['number'] += $number;
+            $_SESSION['cart'][$id]['size'] = $sizeSelect;
             if ($_SESSION['cart'][$id]['number'] == 0) {
                 $this->deleteCart($id);
             }
@@ -63,7 +65,7 @@ class CartController
                 'sale' => $product->sale,
                 'number' => $number,
                 'selectSize' => json_encode($arrSize),
-                'size' => '',
+                'size' => $sizeSelect,
             );
         }
     }
@@ -72,7 +74,11 @@ class CartController
      */
     public function updateSize($id, $size)
     {
-        $_SESSION['cart'][$id]['size'] = $size;
+        if (isset($_SESSION['cart'][$id]['size'])) {
+            $_SESSION['cart'][$id]['size'] = $size;
+        } else {
+            $this->addCart($id);
+        }
     }
     /**
      * Xoá phần tử trong giỏ hàng

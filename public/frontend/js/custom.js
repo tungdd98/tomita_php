@@ -72,13 +72,14 @@ const setLoading = () => {
  * @param {*} number
  * @param {*} isNoti
  */
-const addCart = (id, number = 1, isNoti = false) => {
+const addCart = (id, number = 1, size = "", isNoti = false) => {
   $.ajax({
     url: `/clothes/?controller=cart&action=add`,
     type: "GET",
     data: {
       id,
       number,
+      size,
     },
     success: function (result) {
       if (isNoti) {
@@ -160,6 +161,7 @@ const loadCart = () => {
  * @param {*} data
  */
 const renderCart = (data) => {
+  console.log(data);
   let template = ``;
   if (data.length) {
     let sizes = `<option value="" disabled selected>--Size--</option>`;
@@ -256,7 +258,8 @@ const getTotalNumber = (data) => {
  */
 const addCartDetail = (id) => {
   const number = parseInt($("#input-detail").val());
-  addCart(id, number, true);
+  const size = $("#detail-select").val();
+  addCart(id, number, size, true);
 };
 
 /**
@@ -294,37 +297,12 @@ const checkout = () => {
   });
 };
 
-/**
- * Cập nhật số lượng giỏ hàng
- */
-$(document).on("click", ".n-ctrl.down", function () {
-  const id = $(this).data("id");
-  addCart(id, -1);
-});
-$(document).on("click", ".n-ctrl.up", function () {
-  const id = $(this).data("id");
-  addCart(id, 1);
-});
 $(document).on("click", "a.remove", function (e) {
   e.preventDefault();
   const id = $(this).data("id");
   deleteItemCart(id);
 });
 $(document).on("change", ".js-size", function (e) {
-  const _this = this;
-  $.ajax({
-    url: `/clothes/?controller=cart&action=size`,
-    type: "GET",
-    data: {
-      id: $(_this).data("id"),
-      size: $(_this).val(),
-    },
-    success: function (result) {
-      renderCart(Object.values(JSON.parse(result)));
-    },
-  });
-});
-$(document).on("change", "#detail-select", function (e) {
   const _this = this;
   $.ajax({
     url: `/clothes/?controller=cart&action=size`,
