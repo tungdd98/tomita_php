@@ -330,6 +330,13 @@ $(document).on("click", ".js-down", function () {
   const size = $("#detail-select").val();
   addCart(id, -1, size, false);
 });
+$(".backtotop").on("click", function () {
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+});
 $(document).ready(function () {
   setLoading();
   loadCart();

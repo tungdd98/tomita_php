@@ -93,7 +93,7 @@ RewriteRule ^history-order$ index.php?controller=history
 RewriteRule ^about-us$ index.php?controller=about
 
 #404
-ErrorDocument 404 http://localhost/clothes/404.php
+ErrorDocument 404 http://localhost/clothes/
 
 #----------
 #auth

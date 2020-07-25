@@ -15,9 +15,9 @@ class ProductModel extends Model
     public function getListHasPagination($from, $recordPerPage, $categoryId, $orderBy = 'created_at', $orderDir = 'DESC', $start = 0, $end = 0, $flag = true)
     {
         if($flag) {
-            return parent::_getListAll("Select * from `$this->table` where category_id = $categoryId order by $orderBy $orderDir limit $from, $recordPerPage");
+            return parent::_getListAll("Select * from `$this->table` inner join category_product on products.id = category_product.product_id where category_id = $categoryId order by $orderBy $orderDir limit $from, $recordPerPage");
         } else {
-            return parent::_getListAll("Select * from `$this->table` where category_id = $categoryId and price between $start and $end limit $from, $recordPerPage");
+            return parent::_getListAll("Select * from `$this->table` inner join category_product on products.id = category_product.product_id where category_id = $categoryId and price between $start and $end limit $from, $recordPerPage");
         }
     }
     /**
@@ -25,14 +25,14 @@ class ProductModel extends Model
      */
     public function getListRelate($id)
     {
-        return parent::_getListAll("Select * from `$this->table` where category_id = $id");
+        return parent::_getListAll("Select * from `$this->table` inner join category_product on products.id = category_product.product_id where id = $id");
     }
     /**
      * Lấy số bản ghi
      */
     public function getRowCount($id)
     {
-        return parent::_getRowCount("Select id from `$this->table` where category_id = $id");
+        return parent::_getRowCount("Select products.id from `$this->table` inner join category_product on products.id = category_product.product_id where category_id = $id");
     }
     /**
      * Lấy thông tin phần tử

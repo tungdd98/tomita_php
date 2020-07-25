@@ -39,6 +39,9 @@ echo $this->content;
     </div>
     <?php include "{$COMPONENT_URL}/popup-login.php";?>
     <?php include "{$COMPONENT_URL}/popup-cart.php";?>
+    <?php include "{$COMPONENT_URL}/backtotop.php";?>
+
+
     <script src="public/frontend/js/jquery.js"></script>
     <script src="public/frontend/js/bootstrap.min.js"></script>
     <script src="public/frontend/js/popper.min.js"></script>

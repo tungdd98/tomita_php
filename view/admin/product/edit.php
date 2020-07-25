@@ -15,12 +15,12 @@ document.title = 'Quản lý sản phẩm'
                     <div class="col-md-8 col-sm-12">
                         <div class="form-group">
                             <label for="category">Danh mục</label>
-                            <select class="form-control" id="category" name="categoryId" required>
+                            <select class="form-control" id="category" name="category[]" required multiple>
                                 <option value="" <?php if(empty($record)) { ?> selected <?php } ?> disabled>--- Chọn ---
                                 </option>
                                 <?php foreach($categories as $key => $val) { ?>
                                 <option value="<?php echo $val->id ?>"
-                                    <?php if(!empty($record) && $record->category_id === $val->id) {?> selected <?php } ?>>
+                                    <?php if(!empty($val->checked) && $val->checked == true){?> selected <?php }?>>
                                     <?php echo $val->title ?></option>
                                 <?php }; ?>
                             </select>
@@ -63,7 +63,8 @@ document.title = 'Quản lý sản phẩm'
                                     <div class="form-check">
                                         <input type="checkbox" name="size[]" value="<?php echo $val->id ?>"
                                             class="form-check-input" id="<?php echo "check" . $val->id ?>"
-                                            <?php if(!empty($val->checked) && $val->checked == true){?> checked <?php }?>>
+                                            <?php if(!empty($val->checked) && $val->checked == true){?> checked
+                                            <?php }?>>
                                         <label class="form-check-label"
                                             for="<?php echo "check" . $val->id?>"><?php echo $val->size ?></label>
                                     </div>

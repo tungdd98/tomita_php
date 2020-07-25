@@ -4,7 +4,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
                 <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
-                <li class="breadcrumb-item"><a href="#"><?php echo $category->title ?></a></li>
+                <li class="breadcrumb-item"><a href="#"><?php echo $product->title ?></a></li>
                 <li class="breadcrumb-item active" aria-current="page"><?php echo $product->title ?></li>
             </ol>
         </nav>

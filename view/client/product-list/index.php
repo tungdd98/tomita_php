@@ -1,3 +1,6 @@
+<script src="public/frontend/js/jquery.js"></script>
+<script src="public/frontend/js/bootstrap.min.js"></script>
+<script src="public/frontend/js/popper.min.js"></script>
 <section class="page-product page-primary">
     <div class="container">
         <nav aria-label="breadcrumb">
@@ -111,27 +114,26 @@
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="block-cate-pro mb-2">
-                        <h3 class="title" style="font-size: 20px; font-weight: 600">Lọc theo giá</h3>
-                        <form action="/clothes/index.php?controller=product&action=price&id=<?php echo $categoryId ?>"
-                            method="POST">
-                            <div class="form-group">
-                                <label for="">Từ </label>
-                                <input type="number" step="50000" class="form-control form-control-sm" name="start"
-                                    value=<?php echo $products['start'] ?>>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Đến </label>
-                                <input type="number" step="50000" class="form-control form-control-sm" name="end"
-                                    value=<?php echo $products['end'] ?>>
-                            </div>
-                            <button class="btn btn-outline-danger btn-sm" type="submit">Lọc</button>
-                        </form>
-                    </div>
                     <div class="sb-product">
                         <div class="block-cate-pro">
-                            <h3 class="title">Danh mục sản phẩm</h3>
-                            <?php showCategoriesHor($categories)?>
+                            <h3 class="title">Lọc sản phẩm</h3>
+                            <form
+                                action="/clothes/index.php?controller=product&action=price&id=<?php echo $categoryId ?>"
+                                method="POST">
+                                <div class="form-group">
+                                    <label for="">Từ </label>
+                                    <input type="number" step="50000" class="form-control form-control-sm" name="start"
+                                        value=<?php echo $products['start'] ?>>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Đến </label>
+                                    <input type="number" step="50000" class="form-control form-control-sm" name="end"
+                                        value=<?php echo $products['end'] ?>>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-outline-danger btn-sm" type="submit">Tìm kiếm</button>
+                                </div>
+                            </form>
                         </div>
                         <div class="block-qc v2">
                             <a href="" title=""><img src="public/frontend/images/bn-qc1.jpg" alt=""></a>

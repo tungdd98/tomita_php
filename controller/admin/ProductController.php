@@ -3,9 +3,11 @@ include_once "model/ProductModel.php";
 include_once "model/CategoryModel.php";
 include_once "model/SizeModel.php";
 include_once "model/ProductSizeModel.php";
+include_once "model/Model.php";
 
 class ProductController extends BaseController
 {
+    public $m;
     public $model;
     public $modelCategory;
     public $modelSize;
@@ -20,6 +22,7 @@ class ProductController extends BaseController
         $this->modelCategory = new CategoryModel();
         $this->modelSize = new SizeModel();
         $this->modelProductSize = new ProductSizeModel();
+        $this->m = new Model();
 
         $action = isset($_GET['action']) ? $_GET['action'] : '';
         $id = isset($_GET['id']) ? $_GET['id'] : 0;
@@ -70,7 +73,7 @@ class ProductController extends BaseController
             'formAction' => "$this->linkUrl/do_add",
             'data' => $this->model->getListAll(),
             'categories' => $this->modelCategory->getListAll(),
-            'sizes' => $this->modelSize->getListAll()
+            'sizes' => $this->modelSize->getListAll(),
         );
         $this->loadView("$this->linkUrl/edit", $result);
         $this->setTemplate("base/admin/index");
@@ -97,7 +100,6 @@ class ProductController extends BaseController
         }
         $productId = $this->model->addRecord(array(
             'title' => $_POST['title'],
-            'category_id' => $_POST['categoryId'],
             'description' => $_POST['description'],
             'content' => $_POST['content'],
             'price' => $_POST['price'],
@@ -106,11 +108,14 @@ class ProductController extends BaseController
             'thumbnail' => $thumbnail,
             'images' => json_encode($images),
         ));
-        foreach($_POST['size'] as $key => $val) {
+        foreach ($_POST['size'] as $key => $val) {
             $this->modelProductSize->addRecord(array(
                 'product_id' => $productId,
-                'size_id' => $val
+                'size_id' => $val,
             ));
+        }
+        foreach ($_POST['category'] as $key => $val) {
+            $this->m->_execute("Insert into category_product(product_id, category_id) values ($productId, $val)");
         }
         global $APP_URL;
         header("location:$APP_URL/$this->path&status=add");
@@ -122,18 +127,29 @@ class ProductController extends BaseController
     {
         $productSize = $this->modelProductSize->getListByField('product_id', $id);
         $listSize = $this->modelSize->getListAll();
-        foreach($productSize as $key => $val) {
-            foreach($listSize as $k => $v) {
-                if($val->size_id == $v->id) {
+        foreach ($productSize as $key => $val) {
+            foreach ($listSize as $k => $v) {
+                if ($val->size_id == $v->id) {
                     $v->checked = true;
                 }
             }
         }
+        $categories = $this->modelCategory->getListAll();
+        $category = $this->m->_getListAll("Select * from category_product where product_id = $id");
+        foreach ($category as $key => $val) {
+            foreach ($categories as $k => $v) {
+                if ($val->category_id == $v->id) {
+                    $v->checked = true;
+                }
+            }
+        }
+        
         $result = array(
             'formAction' => "$this->linkUrl/do_edit/$id",
             'record' => $this->model->getRecord($id),
-            'categories' => $this->modelCategory->getListAll(),
-            'sizes' => $listSize
+            'categories' => $categories,
+            'sizes' => $listSize,
+            'category' => $category,
         );
         $this->loadView("$this->linkUrl/edit", $result);
         $this->setTemplate("base/admin/index");
@@ -150,7 +166,6 @@ class ProductController extends BaseController
             'content' => $_POST['content'],
             'price' => $_POST['price'],
             'sale' => $_POST['sale'],
-            'quantity' => 0,
         ));
         if ($_FILES["thumbnail"]["name"] != "") {
             $oldThumbnail = $this->model->getRecord($id)->thumbnail;
@@ -163,6 +178,23 @@ class ProductController extends BaseController
             $this->model->updateRecord($id, array(
                 'thumbnail' => $thumbnail,
             ));
+        }
+        $sizes = $this->model->_getListAll("Select * from product_size where product_id = $id");
+        foreach ($sizes as $key => $val) {
+            $this->model->_execute("Delete from product_size where id = $val->id");
+        }
+        foreach ($_POST['size'] as $key => $val) {
+            $this->modelProductSize->addRecord(array(
+                'product_id' => $id,
+                'size_id' => $val,
+            ));
+        }
+        $categories = $this->m->_getListAll("Select * from category_product where product_id = $id");
+        foreach ($categories as $key => $val) {
+            $this->m->_execute("Delete from category_product where f_id = $val->f_id");
+        }
+        foreach ($_POST['category'] as $key => $val) {
+            $this->m->_execute("Insert into category_product(product_id, category_id) values ($id, $val)");
         }
         global $APP_URL;
         header("location:$APP_URL/$this->path&status=update");
