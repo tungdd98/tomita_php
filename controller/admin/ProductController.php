@@ -161,7 +161,6 @@ class ProductController extends BaseController
     {
         $this->model->updateRecord($id, array(
             'title' => $_POST['title'],
-            'category_id' => $_POST['categoryId'],
             'description' => $_POST['description'],
             'content' => $_POST['content'],
             'price' => $_POST['price'],
