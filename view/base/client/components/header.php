@@ -58,7 +58,6 @@
                             </li>
                             <li><a href="<?php echo "{$APP_URL}/history-order"; ?>" title=""><i
                                         class="lnr lnr-history"></i>Lịch sử mua hàng</a></li>
-                            <li><a href="#" title="" data-toggle="modal" data-target="#pu-cart"><i class="lnr lnr-cart"></i>Giỏ hàng của bạn </a><span>(1)</span>
                             </li>
                             <li><a href="admin/logout" title=""><i class="lnr lnr-exit"></i>Đăng xuất</a></li>
                         </ul>
